@@ -14,11 +14,15 @@ Launch:  pythonw -m piano_scribe.gui        (or `piano-scribe-gui`)
 from __future__ import annotations
 
 import json
+import os as _os
+import queue
 import shutil
 import subprocess
+import sys
 import tempfile
 import threading
 import time
+import traceback
 import winsound
 from dataclasses import dataclass
 from pathlib import Path
@@ -130,6 +134,15 @@ class App(tk.Tk):
         self._denoise_var = tk.BooleanVar(value=False)
         self._msg_queue: list[tuple[str, str]] = []
         self._playing = False
+        self._closing = False
+        self._destroyed = False
+        self._play_q: queue.Queue = queue.Queue()
+        self._error_log = Path.home() / "piano-scribe-gui-errors.log"
+
+        # playback lives on its own thread: winsound must never block the UI
+        threading.Thread(target=self._play_loop, daemon=True).start()
+        # hard watchdog: if closing ever can't reach the event loop, force-exit
+        threading.Thread(target=self._watchdog_loop, daemon=True).start()
 
         self._style = ttk.Style(self)
         self._style.theme_use("clam")
@@ -754,51 +767,115 @@ class App(tk.Tk):
     def _play_recording(self) -> None:
         if not self.proj or self.proj.recording_path is None:
             return
-        self._play_file(self.proj.recording_path)
+        self._play_q.put(("stop", None))
+        self._play_q.put(("play", self.proj.recording_path))
+        self._status_msg(f"Playing {self.proj.recording_path.name}…", "warn")
 
     def _play_detected(self) -> None:
         if not self.proj or not self.proj.notes:
             messagebox.showinfo("Piano Scribe", "No detected notes to play.", parent=self)
             return
-        try:
-            from .synth import render_notes
-            audio = render_notes(self.proj.notes)
-            fd, tmp = tempfile.mkstemp(suffix=".wav", prefix="pianoscribe_")
-            import os
-            os.close(fd)
-            from .audio_io import save_wav
-            save_wav(audio, 22050, Path(tmp))
-            self._play_file(Path(tmp), delete_after=True)
-        except Exception as e:  # noqa: BLE001
-            messagebox.showerror("Piano Scribe", f"Could not synthesize playback: {e}", parent=self)
+        self._status_msg("Rendering detected notes… (can take a few seconds)", "warn")
 
-    def _play_file(self, path: Path, delete_after: bool = False) -> None:
-        self._stop_playback()
-        try:
-            winsound.PlaySound(str(path), winsound.SND_FILENAME | winsound.SND_ASYNC)
-            self._playing = True
-            if delete_after:
+        def work() -> None:
+            try:
+                from .synth import render_notes
+                audio = render_notes(self.proj.notes)
+                fd, tmp = tempfile.mkstemp(suffix=".wav", prefix="pianoscribe_")
+                _os.close(fd)
+                from .audio_io import save_wav
+                save_wav(audio, 22050, Path(tmp))
+                self._msg_queue.append(("play_ready", tmp))
+            except Exception as e:  # noqa: BLE001
+                self._msg_queue.append(("play_fail", str(e)))
 
-                def cleanup() -> None:
-                    time.sleep(6.0)
-                    try:
-                        path.unlink(missing_ok=True)
-                    except OSError:
-                        pass
-                threading.Thread(target=cleanup, daemon=True).start()
-            self._status_msg(f"Playing {path.name}…", "warn")
-        except Exception as e:  # noqa: BLE001
-            messagebox.showerror("Piano Scribe", f"Playback failed: {e}", parent=self)
+        threading.Thread(target=work, daemon=True).start()
 
     def _stop_playback(self) -> None:
-        winsound.PlaySound(None, winsound.PURGE)
+        self._play_q.put(("stop", None))
         self._playing = False
         self._status_msg("Stopped playback.")
 
+    def report_callback_exception(self, exc, val, tb):
+        """Log any Tk callback crash instead of dying silently."""
+        try:
+            with open(self._error_log, "a", encoding="utf-8") as f:
+                f.write(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] {exc}: {val}\n")
+                f.write("".join(traceback.format_tb(tb)) + "\n")
+        except Exception:
+            pass
+        super().report_callback_exception(exc, val, tb)
+
+    def _play_loop(self) -> None:
+        """Owns all winsound calls; stop purges before the next play."""
+        while True:
+            kind, path = self._play_q.get()
+            try:
+                if kind == "stop":
+                    winsound.PlaySound(None, winsound.PURGE)
+                elif kind == "play":
+                    winsound.PlaySound(str(path), winsound.SND_FILENAME | winsound.SND_ASYNC)
+            except Exception:
+                pass
+            if kind == "play":
+                time.sleep(8.0)
+                try:
+                    if path is not None:
+                        path.unlink(missing_ok=True)
+                except OSError:
+                    pass
+
+    def _watchdog_loop(self) -> None:
+        """If close was requested but the UI never finished closing
+        (e.g. wedged in a native call), force the process to exit."""
+        while True:
+            time.sleep(0.25)
+            if self._closing and not self._destroyed:
+                time.sleep(3.0)
+                if self._closing and not self._destroyed:
+                    _os._exit(0)
+            elif self._destroyed:
+                return
+
+    def _on_close(self) -> None:
+        """Fast, jam-proof close: stop capture/cancel work/playback, destroy,
+        and let the watchdog guarantee process exit."""
+        self._closing = True
+        try:
+            if self._rec_stop is not None:
+                self._rec_stop.set()
+        except Exception:
+            pass
+        try:
+            if self._tracker is not None:
+                self._tracker.cancel()
+        except Exception:
+            pass
+        try:
+            self._play_q.put(("stop", None))
+        except Exception:
+            pass
+        try:
+            self.destroy()
+        except Exception:
+            pass
+        finally:
+            self._destroyed = True
+
     # ----------------------------------------------------------- plumbing ---
     def _pump_msgs(self) -> None:
+        if self._destroyed:
+            return
         while self._msg_queue:
             kind, text = self._msg_queue.pop(0)
+            if kind == "play_ready":
+                self._play_q.put(("stop", None))
+                self._play_q.put(("play", Path(text)))
+                self._status_msg("Playing detected notes…", "warn")
+                continue
+            if kind == "play_fail":
+                self._status_msg(f"Playback rendering failed: {text}", "warn")
+                continue
             if kind in ("work_done",):
                 self._status_msg(text, "ok")
                 if self.proj:
@@ -825,10 +902,6 @@ class App(tk.Tk):
                 self.rec_elapsed.configure(text="")
                 self._status_msg(f"Recording failed: {text}", "warn")
         self.after(120, self._pump_msgs)
-
-    def _on_close(self) -> None:
-        self._stop_playback()
-        self.destroy()
 
 
 def _all_descendants(widget) -> list:

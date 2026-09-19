@@ -37,7 +37,7 @@ data, §3.6/6), the Flutter UI itself.
 
 ## Quickstart
 
-## Run the desktop app
+### Run the desktop app
 
 ```bash
 piano-scribe-gui          # or: pythonw -m piano_scribe.gui

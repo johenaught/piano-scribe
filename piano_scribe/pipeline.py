@@ -18,7 +18,7 @@ from typing import Callable, Optional
 import numpy as np
 
 from .audio_io import AudioClip, prepare_for_model
-from .decode import clean_notes, dedupe
+from .decode import clean_notes, dedupe, suppress_octave_leak
 from .models import CancelledError, TranscriptionModel
 from .types import NoteEvent, TranscribeSettings
 
@@ -108,7 +108,8 @@ def transcribe_audio(
         )
 
     stitched = _stitch_chunks(chunk_results, [c[0] / sr for c in chunks], settings)
-    notes = dedupe(stitched)
+    notes = suppress_octave_leak(stitched, settings)
+    notes = dedupe(notes)
     notes.sort(key=lambda n: (n.onset, n.pitch))
     if progress_cb:
         progress_cb(1.0, "done")

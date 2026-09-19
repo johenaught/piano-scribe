@@ -111,6 +111,55 @@ def dedupe(notes: list[NoteEvent]) -> list[NoteEvent]:
     return out
 
 
+def suppress_octave_leak(notes: list[NoteEvent], settings: TranscribeSettings) -> list[NoteEvent]:
+    """Drop overtone-leakage detections: a weak note a HARMONIC interval away
+    (octave / octave+fifth / double octave = the 2nd, 3rd, 4th harmonics)
+    from a strong note struck at (nearly) the same instant.
+
+    Rationale: genuine doublings in the score are played at comparable
+    strength; harmonic leakage shows as a low-confidence detection stacked on
+    a loud attack. Only applies when the weaker note is < 55% confidence AND
+    at most half the confidence of its strong neighbour, so real music is
+    preserved ("make sure a note was played", strict about phantoms).
+    Fully revertible: set suppress_octave_leak=False.
+    """
+    if not settings.suppress_octave_leak:
+        return list(notes)
+    out: list[NoteEvent] = []
+    cluster: list[NoteEvent] = []
+    for n in sorted(notes, key=lambda n: (n.onset, n.pitch)):
+        if cluster and abs(n.onset - cluster[0].onset) > 0.04:
+            out.extend(_clean_cluster(cluster))
+            cluster = []
+        cluster.append(n)
+    if cluster:
+        out.extend(_clean_cluster(cluster))
+    return out
+
+
+_HARMONIC_INTERVALS = (12, 19, 24)  # 2nd, 3rd, 4th harmonics in semitones
+
+
+def _clean_cluster(cluster: list[NoteEvent]) -> list[NoteEvent]:
+    """Drop weak notes that are the harmonic echo of a strong onset-mate."""
+    strong = max((n.confidence or 0.0) for n in cluster)
+    if strong < 0.6:
+        return cluster  # no clearly-supported note: keep everything
+    drop_ids: set[int] = set()
+    for n in cluster:
+        conf = n.confidence or 0.0
+        if conf >= 0.55:
+            continue  # strong enough to trust on its own
+        for other in cluster:
+            if other is n or id(other) in drop_ids:
+                continue
+            if (abs(n.pitch - other.pitch) in _HARMONIC_INTERVALS
+                    and conf <= 0.5 * (other.confidence or 0.0)):
+                drop_ids.add(id(n))
+                break
+    return [n for n in cluster if id(n) not in drop_ids]
+
+
 def match_pitch_notes(ref: Optional[int], pred: Optional[int]) -> bool:
     return ref == pred
 

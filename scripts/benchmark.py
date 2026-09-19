@@ -128,7 +128,7 @@ def main() -> int:
     ap.add_argument("--conditions", nargs="*", default=None)
     ap.add_argument("--chunk-s", type=float, default=45.0)
     ap.add_argument("--overlap-s", type=float, default=2.0)
-    ap.add_argument("--conf", type=float, default=0.25,
+    ap.add_argument("--conf", type=float, default=0.18,
                     help="decoder confidence floor (0 disables; model-relative)")
     ap.add_argument("--tol-on", type=float, default=0.05)
     ap.add_argument("--tol-off", type=float, default=0.10)

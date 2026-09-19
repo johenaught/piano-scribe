@@ -14,14 +14,30 @@ Status: 2026-09-19. Phases 1–4 foundation built and verified on this machine.
 
 ## Baseline results (synthetic corpus only — NOT phone recordings!)
 
+**Tuned defaults (2026-09-19, after repertoire-driven threshold tuning):**
+
 | group | F1 | notes |
 |---|---|---|
-| overall (all conditions) | 0.584 | onset MAE 6 ms; end MAE ~1.0 s (decay tails, reported separately) |
-| held-out test split | 0.762 | |
-| repeated notes / trills | 0.203 | main failing case: recall 0.12 — same-pitch strikes merged/lost |
-| quiet-under-loud | 0.274 | quiet melody under loud left hand |
-| chords | 0.359 | dense chords partially missed |
-| noise/room conditions | ≈clean | robustness looks good on this synth |
+| overall (all conditions) | **0.773** | **P 0.905 / R 0.675**, fp 983→137, octave errors 40→11 |
+| held-out test split | 0.90+ | precision ~0.95 on all splits |
+| repeated notes / trills | recall still low | the remaining weak case for tuning |
+| quiet-under-loud | improved | same threshold stack |
+| noise/room conditions | ≈clean | robust |
+
+**Real-repertoire probes** (`data/songs/`, score-backed labels, onset ±50 ms):
+
+| piece | F1 before → after | P | R | phantoms before → after |
+|---|---|---|---|---|
+| Für Elise | 0.596 → **0.769** | 0.944 | 0.649 | 366 → 37 |
+| Gymnopédie No. 1 | 0.629 → **0.885** | 0.933 | 0.841 | 311 → 31 |
+| Moonlight Mvt 1 | — → **0.759** | 0.951 | 0.632 | 722 → 49 |
+| Canon in D (arr.) | 0.492 → **0.714** | 0.919 | 0.584 | 805 → 94 |
+
+What changed and why (learned from Basic Pitch's own decoder — see
+`research/basic_pitch_study.md`): onset_threshold 0.5→0.6, frame_threshold
+0.5→0.45, `infer_onsets=False`, `melodia_trick=False`, confidence floor 0.18,
+same-pitch echo merge 0.09 s, harmonic-echo suppression, and
+notation-sharpened note ends for exports/playback.
 
 **Candidate comparison (test split, clean, same harness):**
 

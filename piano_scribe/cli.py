@@ -104,6 +104,7 @@ def cmd_transcribe(args) -> int:
         min_pitch=args.min_pitch, max_pitch=args.max_pitch,
         onset_threshold=args.onset, frame_threshold=args.frame,
         min_note_length_s=args.min_len, min_confidence=args.conf_threshold,
+        suppress_octave_leak=not args.no_octave_suppress,
         merge_gap_s=args.merge_gap,
         chunk_s=args.chunk_s, overlap_s=args.overlap_s,
         denoise=args.denoise,
@@ -269,12 +270,15 @@ def main(argv: list[str] | None = None) -> int:
     sp.add_argument("--model", choices=["basic-pitch", "bytedance"], default="basic-pitch")
     sp.add_argument("--min-pitch", type=int, default=21)
     sp.add_argument("--max-pitch", type=int, default=108)
-    sp.add_argument("--onset", type=float, default=0.5)
-    sp.add_argument("--frame", type=float, default=0.5)
+    sp.add_argument("--onset", type=float, default=0.6)
+    sp.add_argument("--frame", type=float, default=0.45)
     sp.add_argument("--min-len", type=float, default=0.05)
-    sp.add_argument("--conf-threshold", type=float, default=0.25,
+    sp.add_argument("--merge-gap", type=float, default=0.09,
+                    help="same-pitch gap smaller than this is one repeated echo, not a new note")
+    sp.add_argument("--conf-threshold", type=float, default=0.18,
                     help="decoder confidence floor (model-relative; 0 disables)")
-    sp.add_argument("--merge-gap", type=float, default=0.045)
+    sp.add_argument("--no-octave-suppress", action="store_true",
+                    help="disable harmonic-echo suppression (default: on)")
     sp.add_argument("--chunk-s", type=float, default=45.0)
     sp.add_argument("--overlap-s", type=float, default=2.0)
     sp.add_argument("--denoise", action="store_true")

@@ -62,11 +62,14 @@ class TranscribeSettings:
     model: str = "basic-pitch"           # backend key
     min_pitch: int = MIDI_PIANO_MIN
     max_pitch: int = MIDI_PIANO_MAX
-    onset_threshold: float = 0.5         # passed through to backend where supported
-    frame_threshold: float = 0.5
+    onset_threshold: float = 0.60        # tuned on real repertoire (see research/basic_pitch_study.md)
+    frame_threshold: float = 0.45
+    infer_onsets: bool = False           # basic-pitch: derive onsets from frame jumps (phantom source for piano)
+    melodia_trick: bool = False          # melody post-filter; hurts chordal music
     min_note_length_s: float = 0.05      # decayed/unsupported blips below this are dropped
     min_confidence: float = 0.0          # decoder drops notes below this (model-relative)
-    merge_gap_s: float = 0.045           # same-pitch gap smaller than this => one note
+    suppress_octave_leak: bool = True    # drop weak harmonic-echo detections at a strong note's onset
+    merge_gap_s: float = 0.09            # same-pitch gap smaller than this => one note (echo-merge)
     chunk_s: float = 45.0                # processing chunk length
     overlap_s: float = 2.0               # chunk overlap for boundary continuity
     denoise: bool = False                # conservative spectral gate (off by default)

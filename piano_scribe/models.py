@@ -96,31 +96,37 @@ class BasicPitchBackend(TranscriptionModel):
 
     def transcribe(self, samples, settings, progress_cb=None, cancel_event=None):
         model = _load_basic_pitch()
-        from basic_pitch.inference import predict
 
         if progress_cb:
             progress_cb(0.2, "inference (ONNX Runtime / TensorFlow)")
         if cancel_event is not None and getattr(cancel_event, "is_set", lambda: False)():
             raise CancelledError("cancelled before model run")
-        # The packaged predict() API reads from a path; chunks are staged in a
-        # temp WAV (the same pattern the deployed app uses: windowed audio in,
-        # note events out).
+
+        # Use basic-pitch's low-level decode so WE own its note-decoding knobs
+        # (the high-level predict() hardcodes infer_onsets=True and
+        # melodia_trick=True, both phantom sources for chordal piano).
         import tempfile
+        from basic_pitch.inference import run_inference
+        from basic_pitch.note_creation import model_output_to_notes
         from .audio_io import save_wav
-        note_events = []
+
         with tempfile.TemporaryDirectory() as td:
             chunk_path = Path(td) / "chunk.wav"
             save_wav(samples, self.spec.sample_rate, chunk_path)
-            _, _, note_events = predict(
-                chunk_path,
-                model,
-                onset_threshold=settings.onset_threshold,
-                frame_threshold=settings.frame_threshold,
-                minimum_note_length=0.1,
-                minimum_frequency=midi_to_hz(settings.min_pitch),
-                maximum_frequency=midi_to_hz(settings.max_pitch),
-                midi_tempo=120,   # tempo ignored: we decode note events ourselves
-            )
+            model_output = run_inference(chunk_path, model)
+        _, note_events = model_output_to_notes(
+            model_output,
+            onset_thresh=settings.onset_threshold,
+            frame_thresh=settings.frame_threshold,
+            infer_onsets=settings.infer_onsets,
+            min_note_len=int(round(settings.min_note_length_s * 1000
+                                   / 1000 * (22050 / 256))),  # frames @10ms
+            min_freq=midi_to_hz(settings.min_pitch),
+            max_freq=midi_to_hz(settings.max_pitch),
+            include_pitch_bends=False,
+            melodia_trick=settings.melodia_trick,
+            midi_tempo=120,
+        )
         if progress_cb:
             progress_cb(0.9, "decoding note events")
         notes = []

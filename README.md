@@ -83,11 +83,17 @@ python scripts/benchmark.py data/corpus         # basic-pitch baseline -> report
 python scripts/benchmark.py data/corpus --model bytedance   # piano-specific comparison (needs torch)
 ```
 
-Current synthetic-clean baseline (test split, basic-pitch, tolerances
-onset ±50 ms): see `data/corpus/reports/benchmark.md`. **Important:** these
-numbers are on synthesized piano-like audio with exact labels — they exercise
-the harness, not a promise about real recordings (outline §8: no accuracy
-promises before benchmarking on actual device recordings).
+Current baseline (default tuned settings, tolerances onset ±50 ms):
+see `data/corpus/reports/benchmark.md` — overall **F1 0.773, P 0.905, R 0.675**
+on the synthetic corpus (down from 0.584 F1 / 983 false positives at
+upstream defaults), and `data/songs/report_tuned.json` for the real
+repertoire probes (Für Elise, Gymnopédie 1, Moonlight Mvt 1, Canon in D):
+F1 0.71–0.89 per piece with 7–20× fewer phantom notes than the baseline.
+**Important:** these numbers are on synthesized piano-like audio with exact
+labels — they exercise the harness, not a promise about real recordings
+(outline §8: no accuracy promises before benchmarking on actual device
+recordings). What the tuning did, and what we learned from Basic Pitch's own
+decoder, is documented in `research/basic_pitch_study.md`.
 
 ## Evaluation semantics (read before trusting any number)
 

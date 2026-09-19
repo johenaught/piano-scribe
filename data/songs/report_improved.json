@@ -1,0 +1,3085 @@
+{
+  "settings": {
+    "model": "basic-pitch",
+    "min_pitch": 21,
+    "max_pitch": 108,
+    "onset_threshold": 0.5,
+    "frame_threshold": 0.5,
+    "min_note_length_s": 0.05,
+    "min_confidence": 0.25,
+    "suppress_octave_leak": true,
+    "merge_gap_s": 0.09,
+    "chunk_s": 45.0,
+    "overlap_s": 2.0,
+    "denoise": false,
+    "calibration": {}
+  },
+  "eval": {
+    "tol_on_s": 0.05
+  },
+  "songs": {
+    "fur_elise": {
+      "meta": {
+        "path": "data\\songs\\fur_elise.mid",
+        "name": "fur_elise",
+        "tempo_est": 205.3,
+        "n_notes": 955,
+        "duration_s": 211.35
+      },
+      "result": {
+        "n_ref": 955,
+        "n_pred": 906,
+        "tp": 556,
+        "fp": 350,
+        "fn": 399,
+        "octave_errors": 17,
+        "onset_mae": 0.006787568386847188,
+        "end_mae": 0.5691797594948175,
+        "end_mismatch": 403,
+        "precision": 0.6136865342163356,
+        "recall": 0.5821989528795811,
+        "f1": 0.5975282106394412,
+        "fp_details": [
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 69,
+              "onset": 12.63935873015873,
+              "end": 13.034097959183674,
+              "confidence": 0.5363366603851318,
+              "velocity": 68,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 57,
+              "onset": 12.575,
+              "end": 12.924999999999999,
+              "confidence": null,
+              "velocity": 43,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 45,
+              "onset": 15.717286621315193,
+              "end": 17.890920181405896,
+              "confidence": 0.6144747734069824,
+              "velocity": 78,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 57,
+              "onset": 15.81590909090909,
+              "end": 16.16590909090909,
+              "confidence": null,
+              "velocity": 39,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 45,
+              "onset": 29.286727437641723,
+              "end": 29.845290249433106,
+              "confidence": 0.5686430931091309,
+              "velocity": 72,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 57,
+              "onset": 29.254545454545454,
+              "end": 29.604545454545452,
+              "confidence": null,
+              "velocity": 35,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 52,
+              "onset": 37.83809024943311,
+              "end": 38.186389569161,
+              "confidence": 0.677676796913147,
+              "velocity": 86,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 64,
+              "onset": 37.793181818181814,
+              "end": 38.143181818181816,
+              "confidence": null,
+              "velocity": 48,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 55,
+              "onset": 69.66158866213152,
+              "end": 69.71963854875284,
+              "confidence": 0.5044301748275757,
+              "velocity": 64,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 67,
+              "onset": 69.68863636363636,
+              "end": 69.90454545454546,
+              "confidence": null,
+              "velocity": 75,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 67,
+              "onset": 70.69487664399094,
+              "end": 70.83548027210884,
+              "confidence": 0.5125756859779358,
+              "velocity": 65,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 79,
+              "onset": 70.71136363636363,
+              "end": 70.81590909090909,
+              "confidence": null,
+              "velocity": 78,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 52,
+              "onset": 105.94717006802722,
+              "end": 106.04004988662132,
+              "confidence": 0.4609066843986511,
+              "velocity": 59,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 40,
+              "onset": 105.96818181818182,
+              "end": 106.31818181818181,
+              "confidence": null,
+              "velocity": 52,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 52,
+              "onset": 107.63061678004536,
+              "end": 111.83728027210884,
+              "confidence": 0.6470167636871338,
+              "velocity": 82,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 64,
+              "onset": 107.57727272727273,
+              "end": 112.5,
+              "confidence": null,
+              "velocity": 65,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 33,
+              "onset": 127.27592743764173,
+              "end": 127.53134693877551,
+              "confidence": 0.6052402853965759,
+              "velocity": 77,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 45,
+              "onset": 127.28636363636363,
+              "end": 127.59090909090908,
+              "confidence": null,
+              "velocity": 66,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 33,
+              "onset": 128.64718866213153,
+              "end": 128.7516784580499,
+              "confidence": 0.46356937289237976,
+              "velocity": 59,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 45,
+              "onset": 128.5659090909091,
+              "end": 128.85,
+              "confidence": null,
+              "velocity": 59,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 33,
+              "onset": 137.213389569161,
+              "end": 137.64295873015874,
+              "confidence": 0.5403456091880798,
+              "velocity": 69,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 45,
+              "onset": 137.1590909090909,
+              "end": 137.5090909090909,
+              "confidence": null,
+              "velocity": 55,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 33,
+              "onset": 138.6878566893424,
+              "end": 138.92005623582767,
+              "confidence": 0.5102540850639343,
+              "velocity": 65,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 45,
+              "onset": 138.63181818181818,
+              "end": 138.9181818181818,
+              "confidence": null,
+              "velocity": 48,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 33,
+              "onset": 140.48868707482993,
+              "end": 140.7208866213152,
+              "confidence": 0.5383514165878296,
+              "velocity": 68,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 45,
+              "onset": 140.41363636363636,
+              "end": 140.76363636363635,
+              "confidence": null,
+              "velocity": 43,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 33,
+              "onset": 140.87181632653062,
+              "end": 140.97759002267574,
+              "confidence": 0.5486491322517395,
+              "velocity": 70,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 45,
+              "onset": 140.7931818181818,
+              "end": 141.0590909090909,
+              "confidence": null,
+              "velocity": 55,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 69,
+              "onset": 162.55015691609978,
+              "end": 162.6082068027211,
+              "confidence": 0.546798586845398,
+              "velocity": 69,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 57,
+              "onset": 162.52272727272725,
+              "end": 163.37954545454545,
+              "confidence": null,
+              "velocity": 33,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 81,
+              "onset": 163.07388979591838,
+              "end": 163.67760861678005,
+              "confidence": 0.5378437638282776,
+              "velocity": 68,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 93,
+              "onset": 162.9840909090909,
+              "end": 163.6909090909091,
+              "confidence": null,
+              "velocity": 73,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 45,
+              "onset": 163.410579138322,
+              "end": 163.5382888888889,
+              "confidence": 0.5442540645599365,
+              "velocity": 69,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 57,
+              "onset": 163.3931818181818,
+              "end": 163.8409090909091,
+              "confidence": null,
+              "velocity": 42,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          }
+        ],
+        "fn_details": []
+      },
+      "result_loose_100ms": {
+        "f1": 0.622,
+        "precision": 0.639,
+        "recall": 0.606,
+        "tp": 579,
+        "fp": 327,
+        "fn": 376
+      },
+      "n_missed": 399,
+      "n_phantoms": 350,
+      "missed": [
+        {
+          "note": "E3",
+          "pitch": 52,
+          "onset": 5.975,
+          "end": 6.325,
+          "conf": null
+        },
+        {
+          "note": "E4",
+          "pitch": 64,
+          "onset": 8.018,
+          "end": 8.368,
+          "conf": null
+        },
+        {
+          "note": "E3",
+          "pitch": 52,
+          "onset": 9.095,
+          "end": 9.445,
+          "conf": null
+        },
+        {
+          "note": "D#5",
+          "pitch": 75,
+          "onset": 10.198,
+          "end": 10.436,
+          "conf": null
+        },
+        {
+          "note": "E5",
+          "pitch": 76,
+          "onset": 10.448,
+          "end": 10.673,
+          "conf": null
+        },
+        {
+          "note": "D#5",
+          "pitch": 75,
+          "onset": 10.684,
+          "end": 10.932,
+          "conf": null
+        },
+        {
+          "note": "E5",
+          "pitch": 76,
+          "onset": 10.943,
+          "end": 11.455,
+          "conf": null
+        },
+        {
+          "note": "A3",
+          "pitch": 57,
+          "onset": 12.575,
+          "end": 12.925,
+          "conf": null
+        },
+        {
+          "note": "E3",
+          "pitch": 52,
+          "onset": 15.52,
+          "end": 15.87,
+          "conf": null
+        },
+        {
+          "note": "A3",
+          "pitch": 57,
+          "onset": 15.816,
+          "end": 16.166,
+          "conf": null
+        },
+        {
+          "note": "D5",
+          "pitch": 74,
+          "onset": 18.175,
+          "end": 18.43,
+          "conf": null
+        },
+        {
+          "note": "E3",
+          "pitch": 52,
+          "onset": 19.073,
+          "end": 19.423,
+          "conf": null
+        },
+        {
+          "note": "E3",
+          "pitch": 52,
+          "onset": 20.655,
+          "end": 21.005,
+          "conf": null
+        },
+        {
+          "note": "A3",
+          "pitch": 57,
+          "onset": 21.984,
+          "end": 22.539,
+          "conf": null
+        },
+        {
+          "note": "E3",
+          "pitch": 52,
+          "onset": 22.255,
+          "end": 22.605,
+          "conf": null
+        },
+        {
+          "note": "A3",
+          "pitch": 57,
+          "onset": 22.545,
+          "end": 22.895,
+          "conf": null
+        },
+        {
+          "note": "E5",
+          "pitch": 76,
+          "onset": 24.123,
+          "end": 24.659,
+          "conf": null
+        },
+        {
+          "note": "E3",
+          "pitch": 52,
+          "onset": 25.716,
+          "end": 26.066,
+          "conf": null
+        },
+        {
+          "note": "A3",
+          "pitch": 57,
+          "onset": 29.255,
+          "end": 29.605,
+          "conf": null
+        },
+        {
+          "note": "C5",
+          "pitch": 72,
+          "onset": 29.882,
+          "end": 30.134,
+          "conf": null
+        },
+        {
+          "note": "G2",
+          "pitch": 43,
+          "onset": 32.148,
+          "end": 32.498,
+          "conf": null
+        },
+        {
+          "note": "D5",
+          "pitch": 74,
+          "onset": 32.166,
+          "end": 33.295,
+          "conf": null
+        },
+        {
+          "note": "D5",
+          "pitch": 74,
+          "onset": 33.584,
+          "end": 33.925,
+          "conf": null
+        },
+        {
+          "note": "A3",
+          "pitch": 57,
+          "onset": 33.891,
+          "end": 34.241,
+          "conf": null
+        },
+        {
+          "note": "C5",
+          "pitch": 72,
+          "onset": 35.593,
+          "end": 36.082,
+          "conf": null
+        }
+      ],
+      "phantoms": [
+        {
+          "note": "E3",
+          "pitch": 52,
+          "onset": 5.877,
+          "end": 6.25,
+          "conf": 0.668
+        },
+        {
+          "note": "A4",
+          "pitch": 69,
+          "onset": 5.971,
+          "end": 6.761,
+          "conf": 0.552
+        },
+        {
+          "note": "A2",
+          "pitch": 45,
+          "onset": 6.25,
+          "end": 7.167,
+          "conf": 0.557
+        },
+        {
+          "note": "E3",
+          "pitch": 52,
+          "onset": 6.378,
+          "end": 6.552,
+          "conf": 0.541
+        },
+        {
+          "note": "E3",
+          "pitch": 52,
+          "onset": 6.714,
+          "end": 6.9,
+          "conf": 0.539
+        },
+        {
+          "note": "E3",
+          "pitch": 52,
+          "onset": 7.167,
+          "end": 7.26,
+          "conf": 0.506
+        },
+        {
+          "note": "C4",
+          "pitch": 60,
+          "onset": 7.307,
+          "end": 7.887,
+          "conf": 0.527
+        },
+        {
+          "note": "E3",
+          "pitch": 52,
+          "onset": 7.516,
+          "end": 10.258,
+          "conf": 0.582
+        },
+        {
+          "note": "E4",
+          "pitch": 64,
+          "onset": 8.132,
+          "end": 8.213,
+          "conf": 0.51
+        },
+        {
+          "note": "B4",
+          "pitch": 71,
+          "onset": 8.202,
+          "end": 8.26,
+          "conf": 0.529
+        },
+        {
+          "note": "G#4",
+          "pitch": 68,
+          "onset": 9.34,
+          "end": 9.583,
+          "conf": 0.58
+        },
+        {
+          "note": "E2",
+          "pitch": 40,
+          "onset": 10.316,
+          "end": 10.502,
+          "conf": 0.498
+        },
+        {
+          "note": "C5",
+          "pitch": 72,
+          "onset": 10.641,
+          "end": 11.048,
+          "conf": 0.545
+        },
+        {
+          "note": "E4",
+          "pitch": 64,
+          "onset": 10.711,
+          "end": 11.024,
+          "conf": 0.58
+        },
+        {
+          "note": "E2",
+          "pitch": 40,
+          "onset": 10.769,
+          "end": 12.001,
+          "conf": 0.603
+        },
+        {
+          "note": "D#5",
+          "pitch": 75,
+          "onset": 11.338,
+          "end": 11.454,
+          "conf": 0.656
+        },
+        {
+          "note": "A4",
+          "pitch": 69,
+          "onset": 12.349,
+          "end": 12.465,
+          "conf": 0.516
+        },
+        {
+          "note": "A4",
+          "pitch": 69,
+          "onset": 12.639,
+          "end": 13.034,
+          "conf": 0.536
+        },
+        {
+          "note": "E3",
+          "pitch": 52,
+          "onset": 13.568,
+          "end": 13.661,
+          "conf": 0.496
+        },
+        {
+          "note": "A3",
+          "pitch": 57,
+          "onset": 13.777,
+          "end": 13.835,
+          "conf": 0.496
+        },
+        {
+          "note": "B4",
+          "pitch": 71,
+          "onset": 14.22,
+          "end": 14.626,
+          "conf": 0.559
+        },
+        {
+          "note": "E3",
+          "pitch": 52,
+          "onset": 14.533,
+          "end": 17.1,
+          "conf": 0.657
+        },
+        {
+          "note": "A4",
+          "pitch": 69,
+          "onset": 15.659,
+          "end": 15.729,
+          "conf": 0.514
+        },
+        {
+          "note": "A3",
+          "pitch": 57,
+          "onset": 15.671,
+          "end": 17.274,
+          "conf": 0.628
+        },
+        {
+          "note": "A2",
+          "pitch": 45,
+          "onset": 15.717,
+          "end": 17.891,
+          "conf": 0.614
+        }
+      ],
+      "processing_s": 12.45,
+      "proc_s_per_min": 3.53
+    },
+    "gymnopedie_1": {
+      "meta": {
+        "path": "data\\songs\\gymnopedie_1.mid",
+        "name": "gymnopedie_1",
+        "tempo_est": 69.1,
+        "n_notes": 516,
+        "duration_s": 206.39
+      },
+      "result": {
+        "n_ref": 516,
+        "n_pred": 686,
+        "tp": 379,
+        "fp": 307,
+        "fn": 137,
+        "octave_errors": 3,
+        "onset_mae": 0.005656447301076387,
+        "end_mae": 0.731794559563653,
+        "end_mismatch": 369,
+        "precision": 0.5524781341107872,
+        "recall": 0.7344961240310077,
+        "f1": 0.6306156405990017,
+        "fp_details": [
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 38,
+              "onset": 110.26864943310657,
+              "end": 112.12752970521542,
+              "confidence": 0.8058084845542908,
+              "velocity": 73,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 50,
+              "onset": 110.36136363636363,
+              "end": 110.52954545454546,
+              "confidence": null,
+              "velocity": 65,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 47,
+              "onset": 118.42398911564626,
+              "end": 119.91135011337869,
+              "confidence": 0.6458765268325806,
+              "velocity": 49,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 59,
+              "onset": 118.5,
+              "end": 118.85,
+              "confidence": null,
+              "velocity": 75,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 38,
+              "onset": 129.82108027210884,
+              "end": 131.7528485260771,
+              "confidence": 0.8254015445709229,
+              "velocity": 75,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 50,
+              "onset": 129.91136363636363,
+              "end": 130.07954545454544,
+              "confidence": null,
+              "velocity": 65,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          }
+        ],
+        "fn_details": []
+      },
+      "result_loose_100ms": {
+        "f1": 0.672,
+        "precision": 0.589,
+        "recall": 0.783,
+        "tp": 404,
+        "fp": 282,
+        "fn": 112
+      },
+      "n_missed": 137,
+      "n_phantoms": 307,
+      "missed": [
+        {
+          "note": "D2",
+          "pitch": 38,
+          "onset": 4.005,
+          "end": 4.355,
+          "conf": null
+        },
+        {
+          "note": "D2",
+          "pitch": 38,
+          "onset": 9.761,
+          "end": 10.111,
+          "conf": null
+        },
+        {
+          "note": "F#5",
+          "pitch": 78,
+          "onset": 12.27,
+          "end": 12.87,
+          "conf": null
+        },
+        {
+          "note": "F#4",
+          "pitch": 66,
+          "onset": 13.125,
+          "end": 13.725,
+          "conf": null
+        },
+        {
+          "note": "D2",
+          "pitch": 38,
+          "onset": 13.891,
+          "end": 14.12,
+          "conf": null
+        },
+        {
+          "note": "D4",
+          "pitch": 62,
+          "onset": 17.136,
+          "end": 17.486,
+          "conf": null
+        },
+        {
+          "note": "D2",
+          "pitch": 38,
+          "onset": 18.755,
+          "end": 19.105,
+          "conf": null
+        },
+        {
+          "note": "F#4",
+          "pitch": 66,
+          "onset": 20.605,
+          "end": 21.205,
+          "conf": null
+        },
+        {
+          "note": "F#4",
+          "pitch": 66,
+          "onset": 21.28,
+          "end": 21.88,
+          "conf": null
+        },
+        {
+          "note": "F#4",
+          "pitch": 66,
+          "onset": 22.089,
+          "end": 22.689,
+          "conf": null
+        },
+        {
+          "note": "B3",
+          "pitch": 59,
+          "onset": 22.091,
+          "end": 22.441,
+          "conf": null
+        },
+        {
+          "note": "D4",
+          "pitch": 62,
+          "onset": 22.091,
+          "end": 22.441,
+          "conf": null
+        },
+        {
+          "note": "D2",
+          "pitch": 38,
+          "onset": 23.711,
+          "end": 24.061,
+          "conf": null
+        },
+        {
+          "note": "D4",
+          "pitch": 62,
+          "onset": 26.955,
+          "end": 27.305,
+          "conf": null
+        },
+        {
+          "note": "B3",
+          "pitch": 59,
+          "onset": 26.957,
+          "end": 27.307,
+          "conf": null
+        },
+        {
+          "note": "D2",
+          "pitch": 38,
+          "onset": 28.575,
+          "end": 28.925,
+          "conf": null
+        },
+        {
+          "note": "D4",
+          "pitch": 62,
+          "onset": 31.925,
+          "end": 32.275,
+          "conf": null
+        },
+        {
+          "note": "D2",
+          "pitch": 38,
+          "onset": 33.545,
+          "end": 33.818,
+          "conf": null
+        },
+        {
+          "note": "A3",
+          "pitch": 57,
+          "onset": 34.361,
+          "end": 34.711,
+          "conf": null
+        },
+        {
+          "note": "D4",
+          "pitch": 62,
+          "onset": 36.793,
+          "end": 37.143,
+          "conf": null
+        },
+        {
+          "note": "D2",
+          "pitch": 38,
+          "onset": 38.411,
+          "end": 38.761,
+          "conf": null
+        },
+        {
+          "note": "A3",
+          "pitch": 57,
+          "onset": 41.736,
+          "end": 42.086,
+          "conf": null
+        },
+        {
+          "note": "F#5",
+          "pitch": 78,
+          "onset": 43.357,
+          "end": 43.957,
+          "conf": null
+        },
+        {
+          "note": "B3",
+          "pitch": 59,
+          "onset": 44.173,
+          "end": 44.523,
+          "conf": null
+        },
+        {
+          "note": "E2",
+          "pitch": 40,
+          "onset": 46.634,
+          "end": 46.984,
+          "conf": null
+        }
+      ],
+      "phantoms": [
+        {
+          "note": "B3",
+          "pitch": 59,
+          "onset": 2.381,
+          "end": 2.463,
+          "conf": 0.532
+        },
+        {
+          "note": "B3",
+          "pitch": 59,
+          "onset": 2.695,
+          "end": 3.879,
+          "conf": 0.533
+        },
+        {
+          "note": "D4",
+          "pitch": 62,
+          "onset": 3.357,
+          "end": 3.821,
+          "conf": 0.547
+        },
+        {
+          "note": "G3",
+          "pitch": 55,
+          "onset": 3.879,
+          "end": 4.728,
+          "conf": 0.594
+        },
+        {
+          "note": "D2",
+          "pitch": 38,
+          "onset": 3.914,
+          "end": 5.935,
+          "conf": 0.749
+        },
+        {
+          "note": "A3",
+          "pitch": 57,
+          "onset": 5.819,
+          "end": 6.343,
+          "conf": 0.593
+        },
+        {
+          "note": "B3",
+          "pitch": 59,
+          "onset": 7.771,
+          "end": 8.341,
+          "conf": 0.54
+        },
+        {
+          "note": "D4",
+          "pitch": 62,
+          "onset": 8.051,
+          "end": 8.689,
+          "conf": 0.587
+        },
+        {
+          "note": "B3",
+          "pitch": 59,
+          "onset": 8.515,
+          "end": 8.689,
+          "conf": 0.554
+        },
+        {
+          "note": "A3",
+          "pitch": 57,
+          "onset": 10.734,
+          "end": 10.804,
+          "conf": 0.521
+        },
+        {
+          "note": "A3",
+          "pitch": 57,
+          "onset": 11.036,
+          "end": 11.198,
+          "conf": 0.51
+        },
+        {
+          "note": "B3",
+          "pitch": 59,
+          "onset": 12.268,
+          "end": 12.337,
+          "conf": 0.485
+        },
+        {
+          "note": "F#5",
+          "pitch": 78,
+          "onset": 12.628,
+          "end": 13.034,
+          "conf": 0.515
+        },
+        {
+          "note": "B3",
+          "pitch": 59,
+          "onset": 12.814,
+          "end": 12.964,
+          "conf": 0.514
+        },
+        {
+          "note": "B3",
+          "pitch": 59,
+          "onset": 13.104,
+          "end": 13.777,
+          "conf": 0.582
+        },
+        {
+          "note": "D2",
+          "pitch": 38,
+          "onset": 13.812,
+          "end": 15.717,
+          "conf": 0.748
+        },
+        {
+          "note": "A5",
+          "pitch": 81,
+          "onset": 14.208,
+          "end": 14.394,
+          "conf": 0.503
+        },
+        {
+          "note": "C#4",
+          "pitch": 61,
+          "onset": 15.148,
+          "end": 15.23,
+          "conf": 0.518
+        },
+        {
+          "note": "F#5",
+          "pitch": 78,
+          "onset": 15.253,
+          "end": 15.497,
+          "conf": 0.58
+        },
+        {
+          "note": "C#4",
+          "pitch": 61,
+          "onset": 15.369,
+          "end": 16.125,
+          "conf": 0.526
+        },
+        {
+          "note": "F#4",
+          "pitch": 66,
+          "onset": 15.706,
+          "end": 16.287,
+          "conf": 0.539
+        },
+        {
+          "note": "A3",
+          "pitch": 57,
+          "onset": 15.799,
+          "end": 16.171,
+          "conf": 0.541
+        },
+        {
+          "note": "F#5",
+          "pitch": 78,
+          "onset": 15.916,
+          "end": 15.997,
+          "conf": 0.511
+        },
+        {
+          "note": "F#4",
+          "pitch": 66,
+          "onset": 17.332,
+          "end": 17.495,
+          "conf": 0.503
+        },
+        {
+          "note": "B3",
+          "pitch": 59,
+          "onset": 17.634,
+          "end": 17.774,
+          "conf": 0.522
+        }
+      ],
+      "processing_s": 3.1,
+      "proc_s_per_min": 0.9
+    },
+    "moonlight_mvt1": {
+      "meta": {
+        "path": "data\\songs\\moonlight_mvt1.mid",
+        "name": "moonlight_mvt1",
+        "tempo_est": 110.9,
+        "n_notes": 1508,
+        "duration_s": 500.94
+      },
+      "result": {
+        "n_ref": 1508,
+        "n_pred": 1601,
+        "tp": 879,
+        "fp": 722,
+        "fn": 629,
+        "octave_errors": 24,
+        "onset_mae": 0.007288699959587994,
+        "end_mae": 1.1034287931906657,
+        "end_mismatch": 810,
+        "precision": 0.5490318550905684,
+        "recall": 0.5828912466843501,
+        "f1": 0.5654551302669669,
+        "fp_details": [
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 49,
+              "onset": 45.06785986394558,
+              "end": 46.11275782312925,
+              "confidence": 0.5397158265113831,
+              "velocity": 69,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 61,
+              "onset": 45.06136363636364,
+              "end": 46.699999999999996,
+              "confidence": null,
+              "velocity": 62,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 40,
+              "onset": 107.63061678004536,
+              "end": 112.62675873015873,
+              "confidence": 0.6333762407302856,
+              "velocity": 59,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 52,
+              "onset": 107.725,
+              "end": 108.19999999999999,
+              "confidence": null,
+              "velocity": 65,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 55,
+              "onset": 109.2689074829932,
+              "end": 109.43144716553289,
+              "confidence": 0.5860599875450134,
+              "velocity": 47,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 67,
+              "onset": 109.34318181818182,
+              "end": 110.35909090909091,
+              "confidence": null,
+              "velocity": 61,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 47,
+              "onset": 117.65644671201814,
+              "end": 118.04085986394557,
+              "confidence": 0.5063862800598145,
+              "velocity": 64,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 59,
+              "onset": 117.64772727272727,
+              "end": 117.99772727272726,
+              "confidence": null,
+              "velocity": 71,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 40,
+              "onset": 120.75887845804988,
+              "end": 122.67580861678005,
+              "confidence": 0.7221003770828247,
+              "velocity": 67,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 52,
+              "onset": 120.84090909090908,
+              "end": 121.19090909090909,
+              "confidence": null,
+              "velocity": 89,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 40,
+              "onset": 123.90775011337868,
+              "end": 125.61441678004536,
+              "confidence": 0.5927982330322266,
+              "velocity": 60,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 52,
+              "onset": 123.99545454545454,
+              "end": 124.34545454545454,
+              "confidence": null,
+              "velocity": 84,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 30,
+              "onset": 135.58670884353742,
+              "end": 138.85039637188208,
+              "confidence": 0.7101178765296936,
+              "velocity": 66,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 42,
+              "onset": 135.63863636363635,
+              "end": 135.98863636363635,
+              "confidence": null,
+              "velocity": 68,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 47,
+              "onset": 139.64115873015874,
+              "end": 139.79208843537415,
+              "confidence": 0.5090237259864807,
+              "velocity": 65,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 59,
+              "onset": 139.6,
+              "end": 141.18863636363636,
+              "confidence": null,
+              "velocity": 67,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 36,
+              "onset": 177.97138004535148,
+              "end": 179.51550702947847,
+              "confidence": 0.6050346493721008,
+              "velocity": 77,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 48,
+              "onset": 177.90454545454546,
+              "end": 178.25454545454545,
+              "confidence": null,
+              "velocity": 102,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 33,
+              "onset": 273.40381723356006,
+              "end": 273.6476267573696,
+              "confidence": 0.5358609557151794,
+              "velocity": 63,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 45,
+              "onset": 273.3454545454545,
+              "end": 273.69545454545454,
+              "confidence": null,
+              "velocity": 92,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 61,
+              "onset": 275.04210793650793,
+              "end": 275.13498775510203,
+              "confidence": 0.5082913637161255,
+              "velocity": 65,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 49,
+              "onset": 274.95,
+              "end": 275.3,
+              "confidence": null,
+              "velocity": 73,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 44,
+              "onset": 280.3633292517007,
+              "end": 280.8973882086168,
+              "confidence": 0.5365091562271118,
+              "velocity": 68,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 56,
+              "onset": 280.3681818181818,
+              "end": 282.0363636363636,
+              "confidence": null,
+              "velocity": 65,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 32,
+              "onset": 281.0134879818594,
+              "end": 281.19924761904764,
+              "confidence": 0.5108892917633057,
+              "velocity": 65,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 44,
+              "onset": 280.91363636363633,
+              "end": 282.8181818181818,
+              "confidence": null,
+              "velocity": 51,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 52,
+              "onset": 289.296537414966,
+              "end": 289.6332267573696,
+              "confidence": 0.510614812374115,
+              "velocity": 65,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 64,
+              "onset": 289.25454545454545,
+              "end": 290.9090909090909,
+              "confidence": null,
+              "velocity": 68,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 44,
+              "onset": 296.5114689342404,
+              "end": 296.70883854875285,
+              "confidence": 0.4511493444442749,
+              "velocity": 57,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 56,
+              "onset": 296.53181818181815,
+              "end": 296.8818181818182,
+              "confidence": null,
+              "velocity": 63,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 47,
+              "onset": 308.5967768707483,
+              "end": 309.42236916099773,
+              "confidence": 0.5221532583236694,
+              "velocity": 66,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 59,
+              "onset": 308.60681818181814,
+              "end": 309.67954545454546,
+              "confidence": null,
+              "velocity": 66,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 40,
+              "onset": 325.30347936507934,
+              "end": 328.60199682539684,
+              "confidence": 0.686357855796814,
+              "velocity": 56,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 52,
+              "onset": 325.4,
+              "end": 325.9795454545454,
+              "confidence": null,
+              "velocity": 66,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 47,
+              "onset": 325.4544090702948,
+              "end": 325.52406893424035,
+              "confidence": 0.5433838963508606,
+              "velocity": 69,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 59,
+              "onset": 325.4022727272727,
+              "end": 327.03863636363633,
+              "confidence": null,
+              "velocity": 67,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 30,
+              "onset": 338.45367709750565,
+              "end": 340.556366893424,
+              "confidence": 0.7146400213241577,
+              "velocity": 67,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 42,
+              "onset": 338.5272727272727,
+              "end": 338.8772727272727,
+              "confidence": null,
+              "velocity": 59,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 42,
+              "onset": 338.58138684807255,
+              "end": 338.6510467120181,
+              "confidence": 0.5137420296669006,
+              "velocity": 65,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 30,
+              "onset": 338.5272727272727,
+              "end": 338.8772727272727,
+              "confidence": null,
+              "velocity": 55,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 42,
+              "onset": 367.303737414966,
+              "end": 369.1626176870748,
+              "confidence": 0.7248117327690125,
+              "velocity": 52,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 54,
+              "onset": 367.39772727272725,
+              "end": 367.7477272727273,
+              "confidence": null,
+              "velocity": 97,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 49,
+              "onset": 390.5655469387755,
+              "end": 391.6349487528345,
+              "confidence": 0.523656964302063,
+              "velocity": 67,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 61,
+              "onset": 390.56363636363636,
+              "end": 390.91363636363633,
+              "confidence": null,
+              "velocity": 61,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 44,
+              "onset": 416.7511265306122,
+              "end": 416.9033401360544,
+              "confidence": 0.5010638236999512,
+              "velocity": 64,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 56,
+              "onset": 416.7386363636363,
+              "end": 418.37045454545455,
+              "confidence": null,
+              "velocity": 57,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 37,
+              "onset": 452.1775696145125,
+              "end": 452.3517192743764,
+              "confidence": 0.5608551502227783,
+              "velocity": 71,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 49,
+              "onset": 452.125,
+              "end": 456.09999999999997,
+              "confidence": null,
+              "velocity": 73,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          }
+        ],
+        "fn_details": []
+      },
+      "result_loose_100ms": {
+        "f1": 0.585,
+        "precision": 0.568,
+        "recall": 0.603,
+        "tp": 909,
+        "fp": 692,
+        "fn": 599
+      },
+      "n_missed": 629,
+      "n_phantoms": 722,
+      "missed": [
+        {
+          "note": "G#2",
+          "pitch": 44,
+          "onset": 0.177,
+          "end": 0.552,
+          "conf": null
+        },
+        {
+          "note": "A#2",
+          "pitch": 46,
+          "onset": 0.557,
+          "end": 0.614,
+          "conf": null
+        },
+        {
+          "note": "F3",
+          "pitch": 53,
+          "onset": 0.557,
+          "end": 0.639,
+          "conf": null
+        },
+        {
+          "note": "D4",
+          "pitch": 62,
+          "onset": 0.557,
+          "end": 0.627,
+          "conf": null
+        },
+        {
+          "note": "G#3",
+          "pitch": 56,
+          "onset": 0.561,
+          "end": 0.7,
+          "conf": null
+        },
+        {
+          "note": "C3",
+          "pitch": 48,
+          "onset": 0.948,
+          "end": 0.995,
+          "conf": null
+        },
+        {
+          "note": "C4",
+          "pitch": 60,
+          "onset": 0.95,
+          "end": 1.068,
+          "conf": null
+        },
+        {
+          "note": "C5",
+          "pitch": 72,
+          "onset": 0.95,
+          "end": 1.12,
+          "conf": null
+        },
+        {
+          "note": "C2",
+          "pitch": 36,
+          "onset": 0.952,
+          "end": 1.059,
+          "conf": null
+        },
+        {
+          "note": "G3",
+          "pitch": 55,
+          "onset": 0.952,
+          "end": 1.08,
+          "conf": null
+        },
+        {
+          "note": "G4",
+          "pitch": 67,
+          "onset": 0.957,
+          "end": 1.091,
+          "conf": null
+        },
+        {
+          "note": "E4",
+          "pitch": 64,
+          "onset": 7.136,
+          "end": 8.75,
+          "conf": null
+        },
+        {
+          "note": "G#4",
+          "pitch": 68,
+          "onset": 7.691,
+          "end": 9.28,
+          "conf": null
+        },
+        {
+          "note": "E4",
+          "pitch": 64,
+          "onset": 8.759,
+          "end": 10.359,
+          "conf": null
+        },
+        {
+          "note": "G#3",
+          "pitch": 56,
+          "onset": 9.289,
+          "end": 10.889,
+          "conf": null
+        },
+        {
+          "note": "C#4",
+          "pitch": 61,
+          "onset": 9.814,
+          "end": 11.439,
+          "conf": null
+        },
+        {
+          "note": "E4",
+          "pitch": 64,
+          "onset": 10.368,
+          "end": 12.0,
+          "conf": null
+        },
+        {
+          "note": "E5",
+          "pitch": 76,
+          "onset": 10.37,
+          "end": 12.0,
+          "conf": null
+        },
+        {
+          "note": "G#3",
+          "pitch": 56,
+          "onset": 10.895,
+          "end": 12.539,
+          "conf": null
+        },
+        {
+          "note": "C#4",
+          "pitch": 61,
+          "onset": 11.448,
+          "end": 13.068,
+          "conf": null
+        },
+        {
+          "note": "E4",
+          "pitch": 64,
+          "onset": 12.007,
+          "end": 13.591,
+          "conf": null
+        },
+        {
+          "note": "E5",
+          "pitch": 76,
+          "onset": 12.014,
+          "end": 13.6,
+          "conf": null
+        },
+        {
+          "note": "G#3",
+          "pitch": 56,
+          "onset": 12.552,
+          "end": 14.13,
+          "conf": null
+        },
+        {
+          "note": "G#4",
+          "pitch": 68,
+          "onset": 12.555,
+          "end": 14.13,
+          "conf": null
+        },
+        {
+          "note": "E4",
+          "pitch": 64,
+          "onset": 13.602,
+          "end": 15.209,
+          "conf": null
+        }
+      ],
+      "phantoms": [
+        {
+          "note": "C2",
+          "pitch": 36,
+          "onset": 1.057,
+          "end": 1.115,
+          "conf": 0.513
+        },
+        {
+          "note": "C2",
+          "pitch": 36,
+          "onset": 1.567,
+          "end": 2.637,
+          "conf": 0.694
+        },
+        {
+          "note": "G#1",
+          "pitch": 32,
+          "onset": 1.649,
+          "end": 2.114,
+          "conf": 0.512
+        },
+        {
+          "note": "C#4",
+          "pitch": 61,
+          "onset": 5.308,
+          "end": 5.517,
+          "conf": 0.508
+        },
+        {
+          "note": "C#3",
+          "pitch": 49,
+          "onset": 5.39,
+          "end": 5.448,
+          "conf": 0.514
+        },
+        {
+          "note": "G#3",
+          "pitch": 56,
+          "onset": 6.912,
+          "end": 7.028,
+          "conf": 0.522
+        },
+        {
+          "note": "E5",
+          "pitch": 76,
+          "onset": 8.109,
+          "end": 8.26,
+          "conf": 0.528
+        },
+        {
+          "note": "E5",
+          "pitch": 76,
+          "onset": 9.583,
+          "end": 9.839,
+          "conf": 0.525
+        },
+        {
+          "note": "E5",
+          "pitch": 76,
+          "onset": 10.026,
+          "end": 11.954,
+          "conf": 0.579
+        },
+        {
+          "note": "E5",
+          "pitch": 76,
+          "onset": 12.175,
+          "end": 14.638,
+          "conf": 0.564
+        },
+        {
+          "note": "G#4",
+          "pitch": 68,
+          "onset": 14.591,
+          "end": 14.672,
+          "conf": 0.508
+        },
+        {
+          "note": "G#5",
+          "pitch": 80,
+          "onset": 15.056,
+          "end": 15.206,
+          "conf": 0.512
+        },
+        {
+          "note": "B1",
+          "pitch": 35,
+          "onset": 15.485,
+          "end": 15.613,
+          "conf": 0.588
+        },
+        {
+          "note": "B1",
+          "pitch": 35,
+          "onset": 16.508,
+          "end": 16.566,
+          "conf": 0.511
+        },
+        {
+          "note": "C#4",
+          "pitch": 61,
+          "onset": 17.588,
+          "end": 17.669,
+          "conf": 0.528
+        },
+        {
+          "note": "A5",
+          "pitch": 81,
+          "onset": 19.389,
+          "end": 19.528,
+          "conf": 0.524
+        },
+        {
+          "note": "E4",
+          "pitch": 64,
+          "onset": 19.702,
+          "end": 19.772,
+          "conf": 0.538
+        },
+        {
+          "note": "A3",
+          "pitch": 57,
+          "onset": 20.168,
+          "end": 20.226,
+          "conf": 0.533
+        },
+        {
+          "note": "A3",
+          "pitch": 57,
+          "onset": 20.504,
+          "end": 22.7,
+          "conf": 0.569
+        },
+        {
+          "note": "A2",
+          "pitch": 45,
+          "onset": 21.213,
+          "end": 21.271,
+          "conf": 0.521
+        },
+        {
+          "note": "A4",
+          "pitch": 69,
+          "onset": 21.398,
+          "end": 21.468,
+          "conf": 0.519
+        },
+        {
+          "note": "A2",
+          "pitch": 45,
+          "onset": 21.48,
+          "end": 21.561,
+          "conf": 0.528
+        },
+        {
+          "note": "F#2",
+          "pitch": 42,
+          "onset": 21.515,
+          "end": 21.758,
+          "conf": 0.509
+        },
+        {
+          "note": "A2",
+          "pitch": 45,
+          "onset": 21.887,
+          "end": 22.05,
+          "conf": 0.534
+        },
+        {
+          "note": "D4",
+          "pitch": 62,
+          "onset": 22.561,
+          "end": 23.815,
+          "conf": 0.619
+        }
+      ],
+      "processing_s": 7.26,
+      "proc_s_per_min": 0.87
+    },
+    "canon_in_d": {
+      "meta": {
+        "path": "data\\songs\\canon_in_d.mid",
+        "name": "canon_in_d",
+        "tempo_est": 140.6,
+        "n_notes": 1834,
+        "duration_s": 374.9
+      },
+      "result": {
+        "n_ref": 1834,
+        "n_pred": 1633,
+        "tp": 854,
+        "fp": 779,
+        "fn": 980,
+        "octave_errors": 21,
+        "onset_mae": 0.00658199560002677,
+        "end_mae": 0.489479662031587,
+        "end_mismatch": 611,
+        "precision": 0.5229638701775873,
+        "recall": 0.46564885496183206,
+        "f1": 0.4926449379867321,
+        "fp_details": [
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 45,
+              "onset": 62.42343718820862,
+              "end": 63.179369614512474,
+              "confidence": 0.5493175387382507,
+              "velocity": 70,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 57,
+              "onset": 62.42045454545454,
+              "end": 62.77045454545454,
+              "confidence": null,
+              "velocity": 86,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 69,
+              "onset": 62.43504716553288,
+              "end": 62.66724671201814,
+              "confidence": 0.558139979839325,
+              "velocity": 58,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 57,
+              "onset": 62.42045454545454,
+              "end": 62.77045454545454,
+              "confidence": null,
+              "velocity": 86,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 47,
+              "onset": 63.21419954648526,
+              "end": 63.353519274376424,
+              "confidence": 0.5423640012741089,
+              "velocity": 65,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 59,
+              "onset": 63.27954545454545,
+              "end": 63.62954545454545,
+              "confidence": null,
+              "velocity": 81,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 50,
+              "onset": 74.83188027210883,
+              "end": 75.19178956916099,
+              "confidence": 0.5595606565475464,
+              "velocity": 71,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 62,
+              "onset": 74.84545454545454,
+              "end": 75.19545454545454,
+              "confidence": null,
+              "velocity": 94,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 33,
+              "onset": 75.27305941043085,
+              "end": 76.77203038548754,
+              "confidence": 0.665686845779419,
+              "velocity": 83,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 45,
+              "onset": 75.27954545454546,
+              "end": 75.62954545454545,
+              "confidence": null,
+              "velocity": 84,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 33,
+              "onset": 89.77452653061225,
+              "end": 90.68138866213152,
+              "confidence": 0.7294193506240845,
+              "velocity": 70,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 45,
+              "onset": 89.84545454545454,
+              "end": 90.19545454545454,
+              "confidence": null,
+              "velocity": 75,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 59,
+              "onset": 108.71162857142858,
+              "end": 109.03670793650794,
+              "confidence": 0.5116166472434998,
+              "velocity": 65,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 71,
+              "onset": 108.70681818181818,
+              "end": 109.05681818181817,
+              "confidence": null,
+              "velocity": 93,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 67,
+              "onset": 115.34477732426303,
+              "end": 115.51892698412698,
+              "confidence": 0.5441533327102661,
+              "velocity": 69,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 79,
+              "onset": 115.34545454545454,
+              "end": 115.55454545454545,
+              "confidence": null,
+              "velocity": 77,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 31,
+              "onset": 149.78308843537414,
+              "end": 151.68840861678004,
+              "confidence": 0.6659415364265442,
+              "velocity": 67,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 43,
+              "onset": 149.85227272727272,
+              "end": 150.2022727272727,
+              "confidence": null,
+              "velocity": 64,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 69,
+              "onset": 165.69902857142858,
+              "end": 166.09376780045352,
+              "confidence": 0.4964374005794525,
+              "velocity": 63,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 57,
+              "onset": 165.70681818181816,
+              "end": 166.0568181818182,
+              "confidence": null,
+              "velocity": 94,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 31,
+              "onset": 166.1982575963719,
+              "end": 166.37240725623582,
+              "confidence": 0.5592594146728516,
+              "velocity": 71,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 43,
+              "onset": 166.13181818181818,
+              "end": 166.48181818181817,
+              "confidence": null,
+              "velocity": 69,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 33,
+              "onset": 209.76843038548753,
+              "end": 211.23128752834467,
+              "confidence": 0.7417264580726624,
+              "velocity": 78,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 45,
+              "onset": 209.84318181818182,
+              "end": 210.1931818181818,
+              "confidence": null,
+              "velocity": 66,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 43,
+              "onset": 249.21320952380952,
+              "end": 250.92116009070295,
+              "confidence": 0.601736307144165,
+              "velocity": 68,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 55,
+              "onset": 249.2772727272727,
+              "end": 249.28863636363636,
+              "confidence": null,
+              "velocity": 70,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 43,
+              "onset": 262.92519818594104,
+              "end": 263.23866757369615,
+              "confidence": 0.5235495567321777,
+              "velocity": 66,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 31,
+              "onset": 262.99545454545455,
+              "end": 263.3454545454545,
+              "confidence": null,
+              "velocity": 67,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 31,
+              "onset": 300.6471886621315,
+              "end": 303.1259097505669,
+              "confidence": 0.710429847240448,
+              "velocity": 66,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 43,
+              "onset": 300.7,
+              "end": 301.575,
+              "confidence": null,
+              "velocity": 69,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 55,
+              "onset": 304.1243678004535,
+              "end": 304.4030072562358,
+              "confidence": 0.5159591436386108,
+              "velocity": 66,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 43,
+              "onset": 304.12954545454545,
+              "end": 304.4795454545454,
+              "confidence": null,
+              "velocity": 74,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 59,
+              "onset": 327.27845941043086,
+              "end": 327.33650929705215,
+              "confidence": 0.5062581300735474,
+              "velocity": 64,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 71,
+              "onset": 327.275,
+              "end": 327.625,
+              "confidence": null,
+              "velocity": 97,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 55,
+              "onset": 345.34352925170066,
+              "end": 345.6021768707483,
+              "confidence": 0.5029515624046326,
+              "velocity": 62,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 43,
+              "onset": 345.3431818181818,
+              "end": 345.6931818181818,
+              "confidence": null,
+              "velocity": 91,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 34,
+              "onset": 357.6145968253968,
+              "end": 357.8351863945578,
+              "confidence": 0.4453665614128113,
+              "velocity": 57,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 46,
+              "onset": 357.6045454545454,
+              "end": 362.5,
+              "confidence": null,
+              "velocity": 73,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 34,
+              "onset": 363.26089750566894,
+              "end": 364.8991882086168,
+              "confidence": 0.5855472087860107,
+              "velocity": 74,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 46,
+              "onset": 363.2590909090909,
+              "end": 363.60909090909087,
+              "confidence": null,
+              "velocity": 88,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 46,
+              "onset": 364.66698866213153,
+              "end": 365.0965578231293,
+              "confidence": 0.5842528343200684,
+              "velocity": 74,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 58,
+              "onset": 364.66590909090905,
+              "end": 367.4795454545454,
+              "confidence": null,
+              "velocity": 92,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          }
+        ],
+        "fn_details": []
+      },
+      "result_loose_100ms": {
+        "f1": 0.524,
+        "precision": 0.556,
+        "recall": 0.495,
+        "tp": 908,
+        "fp": 725,
+        "fn": 926
+      },
+      "n_missed": 980,
+      "n_phantoms": 779,
+      "missed": [
+        {
+          "note": "G#2",
+          "pitch": 44,
+          "onset": 0.177,
+          "end": 0.552,
+          "conf": null
+        },
+        {
+          "note": "D#4",
+          "pitch": 63,
+          "onset": 0.18,
+          "end": 0.552,
+          "conf": null
+        },
+        {
+          "note": "C4",
+          "pitch": 60,
+          "onset": 0.302,
+          "end": 0.552,
+          "conf": null
+        },
+        {
+          "note": "G3",
+          "pitch": 55,
+          "onset": 0.414,
+          "end": 0.552,
+          "conf": null
+        },
+        {
+          "note": "A#2",
+          "pitch": 46,
+          "onset": 0.557,
+          "end": 0.639,
+          "conf": null
+        },
+        {
+          "note": "F3",
+          "pitch": 53,
+          "onset": 0.557,
+          "end": 0.639,
+          "conf": null
+        },
+        {
+          "note": "D4",
+          "pitch": 62,
+          "onset": 0.557,
+          "end": 0.623,
+          "conf": null
+        },
+        {
+          "note": "G#3",
+          "pitch": 56,
+          "onset": 0.564,
+          "end": 0.7,
+          "conf": null
+        },
+        {
+          "note": "C3",
+          "pitch": 48,
+          "onset": 0.948,
+          "end": 1.03,
+          "conf": null
+        },
+        {
+          "note": "C2",
+          "pitch": 36,
+          "onset": 0.952,
+          "end": 1.039,
+          "conf": null
+        },
+        {
+          "note": "G3",
+          "pitch": 55,
+          "onset": 0.952,
+          "end": 0.998,
+          "conf": null
+        },
+        {
+          "note": "C4",
+          "pitch": 60,
+          "onset": 0.952,
+          "end": 1.002,
+          "conf": null
+        },
+        {
+          "note": "F#4",
+          "pitch": 66,
+          "onset": 5.002,
+          "end": 6.68,
+          "conf": null
+        },
+        {
+          "note": "B4",
+          "pitch": 71,
+          "onset": 8.423,
+          "end": 8.773,
+          "conf": null
+        },
+        {
+          "note": "D5",
+          "pitch": 74,
+          "onset": 8.425,
+          "end": 8.43,
+          "conf": null
+        },
+        {
+          "note": "F#3",
+          "pitch": 54,
+          "onset": 10.136,
+          "end": 10.486,
+          "conf": null
+        },
+        {
+          "note": "B4",
+          "pitch": 71,
+          "onset": 15.282,
+          "end": 15.632,
+          "conf": null
+        },
+        {
+          "note": "D3",
+          "pitch": 50,
+          "onset": 18.705,
+          "end": 19.055,
+          "conf": null
+        },
+        {
+          "note": "D5",
+          "pitch": 74,
+          "onset": 18.705,
+          "end": 19.305,
+          "conf": null
+        },
+        {
+          "note": "A4",
+          "pitch": 69,
+          "onset": 18.707,
+          "end": 19.057,
+          "conf": null
+        },
+        {
+          "note": "A5",
+          "pitch": 81,
+          "onset": 18.707,
+          "end": 19.307,
+          "conf": null
+        },
+        {
+          "note": "E5",
+          "pitch": 76,
+          "onset": 20.416,
+          "end": 21.016,
+          "conf": null
+        },
+        {
+          "note": "A5",
+          "pitch": 81,
+          "onset": 20.416,
+          "end": 21.016,
+          "conf": null
+        },
+        {
+          "note": "A2",
+          "pitch": 45,
+          "onset": 20.42,
+          "end": 22.125,
+          "conf": null
+        },
+        {
+          "note": "A4",
+          "pitch": 69,
+          "onset": 20.42,
+          "end": 20.77,
+          "conf": null
+        }
+      ],
+      "phantoms": [
+        {
+          "note": "G#1",
+          "pitch": 32,
+          "onset": 0.975,
+          "end": 1.556,
+          "conf": 0.546
+        },
+        {
+          "note": "C2",
+          "pitch": 36,
+          "onset": 1.567,
+          "end": 2.625,
+          "conf": 0.674
+        },
+        {
+          "note": "G#1",
+          "pitch": 32,
+          "onset": 1.649,
+          "end": 2.103,
+          "conf": 0.558
+        },
+        {
+          "note": "C3",
+          "pitch": 48,
+          "onset": 2.23,
+          "end": 2.335,
+          "conf": 0.525
+        },
+        {
+          "note": "D4",
+          "pitch": 62,
+          "onset": 5.448,
+          "end": 5.796,
+          "conf": 0.521
+        },
+        {
+          "note": "D4",
+          "pitch": 62,
+          "onset": 6.006,
+          "end": 6.134,
+          "conf": 0.539
+        },
+        {
+          "note": "E3",
+          "pitch": 52,
+          "onset": 6.703,
+          "end": 6.819,
+          "conf": 0.551
+        },
+        {
+          "note": "A2",
+          "pitch": 45,
+          "onset": 7.365,
+          "end": 7.643,
+          "conf": 0.531
+        },
+        {
+          "note": "E3",
+          "pitch": 52,
+          "onset": 7.457,
+          "end": 7.643,
+          "conf": 0.518
+        },
+        {
+          "note": "A2",
+          "pitch": 45,
+          "onset": 7.852,
+          "end": 8.341,
+          "conf": 0.609
+        },
+        {
+          "note": "E3",
+          "pitch": 52,
+          "onset": 7.933,
+          "end": 8.329,
+          "conf": 0.605
+        },
+        {
+          "note": "D5",
+          "pitch": 74,
+          "onset": 8.434,
+          "end": 9.328,
+          "conf": 0.598
+        },
+        {
+          "note": "B4",
+          "pitch": 71,
+          "onset": 9.223,
+          "end": 9.723,
+          "conf": 0.568
+        },
+        {
+          "note": "F#1",
+          "pitch": 30,
+          "onset": 10.339,
+          "end": 11.21,
+          "conf": 0.535
+        },
+        {
+          "note": "F#3",
+          "pitch": 54,
+          "onset": 10.978,
+          "end": 11.048,
+          "conf": 0.516
+        },
+        {
+          "note": "G1",
+          "pitch": 31,
+          "onset": 11.954,
+          "end": 13.301,
+          "conf": 0.618
+        },
+        {
+          "note": "G2",
+          "pitch": 43,
+          "onset": 12.523,
+          "end": 12.814,
+          "conf": 0.536
+        },
+        {
+          "note": "D3",
+          "pitch": 50,
+          "onset": 12.605,
+          "end": 12.825,
+          "conf": 0.533
+        },
+        {
+          "note": "G2",
+          "pitch": 43,
+          "onset": 12.964,
+          "end": 13.487,
+          "conf": 0.596
+        },
+        {
+          "note": "D3",
+          "pitch": 50,
+          "onset": 12.988,
+          "end": 13.487,
+          "conf": 0.604
+        },
+        {
+          "note": "A3",
+          "pitch": 57,
+          "onset": 13.941,
+          "end": 15.102,
+          "conf": 0.544
+        },
+        {
+          "note": "G1",
+          "pitch": 31,
+          "onset": 15.543,
+          "end": 16.241,
+          "conf": 0.588
+        },
+        {
+          "note": "G4",
+          "pitch": 67,
+          "onset": 16.078,
+          "end": 16.148,
+          "conf": 0.524
+        },
+        {
+          "note": "G1",
+          "pitch": 31,
+          "onset": 16.404,
+          "end": 16.496,
+          "conf": 0.51
+        },
+        {
+          "note": "G3",
+          "pitch": 55,
+          "onset": 16.624,
+          "end": 16.856,
+          "conf": 0.581
+        }
+      ],
+      "processing_s": 5.66,
+      "proc_s_per_min": 0.91
+    }
+  }
+}

@@ -23,6 +23,37 @@ from .types import NoteEvent, TimingMap
 DIV = 480
 
 
+def sharpened_for_notation(notes: list[NoteEvent], gap_s: float = 0.03) -> list[NoteEvent]:
+    """Notation-oriented release times (outline 3.7 / 11.2).
+
+    A model reports the ACOUSTIC end of a note (decay tail / pedal ring),
+    which is NOT when the key was released and not the written rhythm. For
+    readability, a note's end is capped just before the NEXT attack on the
+    same pitch (a struck note cannot still be held underneath a repeat).
+    Performed/acoustic info is never destroyed: returned events keep the
+    original ``end`` in ``src_end``, and the project store is untouched.
+    """
+    out: list[NoteEvent] = []
+    by_pitch: dict[int, list[NoteEvent]] = {}
+    for n in sorted(notes, key=lambda n: (n.pitch, n.onset)):
+        by_pitch.setdefault(n.pitch, []).append(n)
+    for pitch, evs in by_pitch.items():
+        for i, n in enumerate(evs):
+            end = n.end
+            for nxt in evs[i + 1:]:
+                if nxt.onset - end >= 0.0:
+                    break  # next strike after this one dies: no overlap
+                if nxt.onset - n.onset >= 0.01:
+                    end = min(end, max(n.onset + 0.02, nxt.onset - gap_s))
+                    break
+            out.append(NoteEvent(
+                pitch=n.pitch, onset=n.onset, end=end,
+                confidence=n.confidence, velocity=n.velocity,
+                sustain_pedal=n.sustain_pedal, state=n.state, note_id=n.note_id,
+            ))
+    return sorted(out, key=lambda n: (n.onset, n.pitch))
+
+
 @dataclass
 class ScoreNote:
     pitch: int
@@ -64,13 +95,18 @@ def quantize_notes(
     strength: float = 1.0,
     staff_split: int = 60,
     grid: Optional[float] = None,
+    sharpen: bool = True,
 ) -> Score:
     """Quantize performed notes onto the measure grid with ties.
 
     ``strength`` blends snapped and raw timing (1.0 = fully snapped);
     original onsets/ends are preserved on every ScoreNote (outline 3.7:
     adjustable quantization strength, preserve original timings).
+    ``sharpen`` caps raw acoustic ends at the next same-pitch attack first
+    (see sharpened_for_notation) so written rhythm is readable.
     """
+    if sharpen:
+        notes = sharpened_for_notation(notes)
     spb = timing.seconds_per_beat()
     if grid is None:
         grid = 0.5  # eighth-note grid in beats

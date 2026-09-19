@@ -479,8 +479,12 @@ class App(tk.Tk):
         self._tracker = ProgressTracker()
         settings = TranscribeSettings(
             model="basic-pitch",
+            onset_threshold=0.60,
+            frame_threshold=0.45,
+            infer_onsets=False,
+            melodia_trick=False,
             min_note_length_s=0.05,
-            min_confidence=0.25,
+            min_confidence=0.18,
             chunk_s=45.0,
             overlap_s=2.0,
             denoise=self._denoise_var.get(),
@@ -779,8 +783,9 @@ class App(tk.Tk):
 
         def work() -> None:
             try:
+                from .score_quantize import sharpened_for_notation
                 from .synth import render_notes
-                audio = render_notes(self.proj.notes)
+                audio = render_notes(sharpened_for_notation(self.proj.notes))
                 fd, tmp = tempfile.mkstemp(suffix=".wav", prefix="pianoscribe_")
                 _os.close(fd)
                 from .audio_io import save_wav

@@ -1,0 +1,2 @@
+[console_scripts]
+piano-scribe = piano_scribe.cli:main

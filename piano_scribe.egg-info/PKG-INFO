@@ -1,0 +1,20 @@
+Metadata-Version: 2.4
+Name: piano-scribe
+Version: 0.1.0
+Summary: Local-first solo piano transcription reference pipeline (research + desktop CLI).
+License: Apache-2.0
+Requires-Python: <3.13,>=3.11
+Description-Content-Type: text/markdown
+Requires-Dist: numpy>=1.26
+Requires-Dist: scipy>=1.11
+Requires-Dist: soundfile>=0.12
+Requires-Dist: librosa>=0.10
+Provides-Extra: capture
+Requires-Dist: sounddevice>=0.4.6; extra == "capture"
+Provides-Extra: baseline
+Requires-Dist: basic-pitch>=0.3.0; extra == "baseline"
+Requires-Dist: onnxruntime>=1.16; extra == "baseline"
+Provides-Extra: bytedance
+Requires-Dist: piano_transcription_inference>=0.3.0; extra == "bytedance"
+Provides-Extra: dev
+Requires-Dist: pytest>=7.4; extra == "dev"

@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+data/corpus/audio/
+data/corpus/labels/
+data/corpus/reports/
+*.wav
+*.mid
+*.musicxml
+.DS_Store

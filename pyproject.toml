@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "piano-scribe"
+version = "0.1.0"
+description = "Local-first solo piano transcription reference pipeline (research + desktop CLI)."
+readme = "README.md"
+requires-python = ">=3.11,<3.13"
+license = { text = "Apache-2.0" }
+dependencies = [
+    "numpy>=1.26",
+    "scipy>=1.11",
+    "soundfile>=0.12",
+    "librosa>=0.10",
+]
+
+[project.optional-dependencies]
+capture = ["sounddevice>=0.4.6"]
+baseline = ["basic-pitch>=0.3.0", "onnxruntime>=1.16"]
+bytedance = ["piano_transcription_inference>=0.3.0"]
+dev = ["pytest>=7.4"]
+
+[project.scripts]
+piano-scribe = "piano_scribe.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["piano_scribe*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

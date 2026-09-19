@@ -37,6 +37,21 @@ data, §3.6/6), the Flutter UI itself.
 
 ## Quickstart
 
+## Run the desktop app
+
+```bash
+piano-scribe-gui          # or: pythonw -m piano_scribe.gui
+```
+
+Voice-memo style window: sessions on the left, and each session opens a
+detail pane with Record / Import / Transcribe (progress + cancel) / note
+editing / piano-roll score / original-vs-detected playback comparison /
+MIDI + MusicXML export. Sessions live in `~/Documents/Piano Scribe Sessions`
+(projects created by the CLI can be added via "Add existing project…").
+A desktop shortcut is created by `scripts/make_shortcut.ps1`.
+
+CLI equivalents work on the same project folders:
+
 ```bash
 python -m venv .venv && source .venv/Scripts/activate   # Windows (bash)
 pip install -e . "[baseline]" "[capture]" "[dev]"        # basic-pitch + mic + pytest

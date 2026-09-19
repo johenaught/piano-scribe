@@ -24,6 +24,7 @@ dev = ["pytest>=7.4"]
 
 [project.scripts]
 piano-scribe = "piano_scribe.cli:main"
+piano-scribe-gui = "piano_scribe.gui:main"
 
 [tool.setuptools.packages.find]
 include = ["piano_scribe*"]

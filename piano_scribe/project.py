@@ -133,7 +133,11 @@ class Project:
     def save_recording(self, audio_src: Path, metadata: dict) -> None:
         """Copy the raw recording into the project, hash it, record provenance."""
         dest = self.root / "recording" / "audio.wav"
-        shutil.copyfile(audio_src, dest)
+        src = Path(audio_src).resolve()
+        if src != dest.resolve():
+            shutil.copyfile(src, dest)
+        else:
+            dest = src  # already in place (e.g. GUI capture that saved directly)
         meta = dict(metadata or {})
         meta.update({
             "path": str(dest),

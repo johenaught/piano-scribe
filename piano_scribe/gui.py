@@ -261,6 +261,8 @@ class App(tk.Tk):
             return
         self.session = s
         self._status_msg(f"Opened {s.name}.")
+        self._banner_hide()
+        self.title(f"Piano Scribe — {s.name}")
         self._refresh_sessions()
         self._reload_detail()
 
@@ -279,82 +281,86 @@ class App(tk.Tk):
         self._info_sub = tk.Label(info, text="", fg=MUTED, bg=BGC)
         self._info_sub.pack(anchor="w")
 
-        steps = tk.Frame(parent, bg=BGC)
-        steps.pack(fill="x", padx=12, pady=10)
+        # big, unmissable state banner (recording / transcribing / result)
+        self.banner = tk.Frame(parent, bg=BGC)
+        self.banner.pack(fill="x", padx=12, pady=(2, 6))
+        self.banner_lbl = tk.Label(self.banner, text="", font=("Segoe UI", 15, "bold"),
+                                   fg="white", bg=CARD, pady=8)
+        self.banner_lbl.pack(fill="x")
+        self.banner_timer = tk.Label(self.banner, text="", font=("Segoe UI", 22, "bold"),
+                                     fg="white", bg=CARD)
+        self.banner_timer.pack()
 
-        def step(title: str, text: str) -> None:
-            box = tk.Frame(steps, bg=CARD, padx=12, pady=8)
-            box.pack(side="left", fill="both", expand=True, padx=6)
-            tk.Label(box, text=title, font=("Segoe UI", 10, "bold"), fg=TXT, bg=CARD).pack(anchor="w")
-            tk.Label(box, text=text, fg=MUTED, bg=CARD, justify="left", wraplength=240).pack(anchor="w", pady=(2, 6))
-            return box
+        def row(parent_, buttons) -> tk.Frame:
+            r = tk.Frame(parent_, bg=BGC)
+            r.pack(fill="x", padx=12, pady=4)
+            for text, cmd, kind in buttons:
+                bg = {"red": "#C5484D", "blue": ACCENT, "play": "#3A7BBF", "plain": CARD}[kind]
+                b = tk.Button(r, text=text, command=cmd, bg=bg, fg="white" if kind != "plain" else TXT,
+                              relief="flat", padx=14, pady=6, font=("Segoe UI", 10, "bold"))
+                b.pack(side="left", padx=4)
+                self._action_btns.append(b)
+                if text.startswith(("●", "▶ Transcribe")):
+                    self._primary = b
+            return r
 
-        box1 = step("1 · Capture", "Record from your microphone or import an audio file. The original is saved untouched.")
-        b = tk.Frame(box1, bg=CARD)
-        b.pack(fill="x")
-        self.btn_record = tk.Button(b, text="● Record", command=self._record, bg="#C5484D",
-                                    fg="white", relief="flat", padx=12, pady=4, font=("Segoe UI", 10, "bold"))
-        self.btn_record.pack(side="left", padx=4)
-        self.btn_import = tk.Button(b, text="Import file…", command=self._import_audio, bg=CARD, fg=TXT, relief="flat", padx=10, pady=4)
-        self.btn_import.pack(side="left", padx=4)
-        self.rec_elapsed = tk.Label(box1, text="", fg=TXT, bg=CARD)
-        self.rec_elapsed.pack(anchor="w", pady=(4, 0))
+        self._action_btns: list[tk.Button] = []
+        self._primary: tk.Button | None = None
 
-        box2 = step("2 · Transcribe", "Runs locally. Progress and cancel below.")
-        self.btn_transcribe = tk.Button(box2, text="▶ Transcribe", command=self._transcribe,
-                                        bg=ACCENT, fg="white", relief="flat", padx=12, pady=4,
-                                        font=("Segoe UI", 10, "bold"))
-        self.btn_transcribe.pack(side="left", padx=4)
-        self.btn_cancel = tk.Button(box2, text="Cancel", command=self._cancel_work,
-                                    bg=CARD, fg=TXT, relief="flat", padx=10, pady=4, state="disabled")
-        self.btn_cancel.pack(side="left", padx=4)
-        self.btn_denoise = tk.Checkbutton(box2, text="light noise reduction (A/B test)",
-                                          variable=self._denoise_var, fg=TXT, bg=BGC,
-                                          activebackground=BGC, selectcolor=BGC, font=("Segoe UI", 9))
-        self.btn_denoise.pack(anchor="w", pady=4)
-        self.progress = ttk.Progressbar(box2, mode="determinate")
-        self.progress.pack(fill="x", pady=(6, 2))
-        self.prog_label = tk.Label(box2, text="", fg=MUTED, bg=CARD)
-        self.prog_label.pack(anchor="w")
-
-        box3 = step("3 · Review & export", "Fix notes, listen to the comparison, export.")
-        b3 = tk.Frame(box3, bg=CARD)
-        b3.pack(fill="x")
-        self.btn_midi = tk.Button(b3, text="Export MIDI", command=lambda: self._export("midi"),
-                                  bg=CARD, fg=TXT, relief="flat", padx=10, pady=4)
-        self.btn_midi.pack(side="left", padx=4)
-        self.btn_xml = tk.Button(b3, text="Export MusicXML", command=lambda: self._export("musicxml"),
-                                 bg=CARD, fg=TXT, relief="flat", padx=10, pady=4)
-        self.btn_xml.pack(side="left", padx=4)
-        self.btn_mscore = tk.Button(b3, text="Open in MuseScore…", command=self._open_musescore,
-                                    bg=CARD, fg=TXT, relief="flat", padx=10, pady=4)
-        self.btn_mscore.pack(side="left", padx=4)
-        b4 = tk.Frame(box3, bg=CARD)
-        b4.pack(fill="x", pady=4)
-        self.btn_play_audio = tk.Button(b4, text="▶ Play recording", command=self._play_recording,
-                                        bg="#3A7BBF", fg="white", relief="flat", padx=10, pady=4)
-        self.btn_play_audio.pack(side="left", padx=4)
-        self.btn_play_synth = tk.Button(b4, text="▶ Play detected notes", command=self._play_detected,
-                                        bg="#3A7BBF", fg="white", relief="flat", padx=10, pady=4)
-        self.btn_play_synth.pack(side="left", padx=4)
-        self.btn_stop = tk.Button(b4, text="■ Stop", command=self._stop_playback,
-                                  bg=CARD, fg=TXT, relief="flat", padx=10, pady=4)
-        self.btn_stop.pack(side="left", padx=4)
-        tk.Label(b4, text="compare original vs. what was detected", font=("Segoe UI", 8),
-                 fg=MUTED, bg=CARD).pack(side="left", padx=6)
+        row(parent, [("● Record", self._record, "red"),
+                     ("Import audio…", self._import_audio, "plain"),
+                     ("Open folder", self._open_folder, "plain")])
+        row(parent, [("▶ Transcribe", self._transcribe, "blue"),
+                     ("Cancel", self._cancel_work, "plain")])
+        r = tk.Frame(parent, bg=BGC)
+        r.pack(fill="x", padx=16)
+        self.btn_denoise = tk.Checkbutton(r, text="light noise reduction (A/B test)",
+                                          variable=self._denoise_var, fg=MUTED, bg=BGC,
+                                          activebackground=BGC, selectcolor=BGC, font=("Segoe UI", 8))
+        self.btn_denoise.pack(side="left")
+        self.progress = ttk.Progressbar(r, mode="determinate")
+        self.progress.pack(side="left", fill="x", expand=True, padx=8, pady=4)
+        self.prog_label = tk.Label(r, text="", fg=MUTED, bg=BGC, font=("Segoe UI", 8))
+        self.prog_label.pack(side="left")
+        row(parent, [("▶ Play recording", self._play_recording, "play"),
+                     ("▶ Play detected notes", self._play_detected, "play"),
+                     ("■ Stop", self._stop_playback, "plain")])
+        row(parent, [("Export MIDI", lambda: self._export("midi"), "plain"),
+                     ("Export MusicXML", lambda: self._export("musicxml"), "plain"),
+                     ("Open in MuseScore…", self._open_musescore, "plain")])
+        row(parent, [("⇅ Export session…", self._export_session, "plain"),
+                     ("⇅ Import session…", self._import_session, "plain")])
 
         danger = tk.Frame(parent, bg=BGC)
         danger.pack(side="bottom", fill="x", padx=12, pady=6)
-        self.btn_delete = tk.Button(danger, text="Delete session…", command=self._delete_session,
-                                    bg="#3A2B2B", fg=MUTED, relief="flat", padx=10, pady=4)
-        self.btn_delete.pack(side="left")
+        self._btn_delete = tk.Button(danger, text="Delete session…", command=self._delete_session,
+                                     bg="#3A2B2B", fg=MUTED, relief="flat", padx=10, pady=4)
+        self._btn_delete.pack(side="left")
+        self._action_btns.append(self._btn_delete)
+
+    # ---------------------------------------------------------- state UI ---
+    def _banner_show(self, text: str, color: str, timer: str = "") -> None:
+        self.banner.configure(bg=color)
+        self.banner_lbl.configure(text=text, bg=color)
+        self.banner_timer.configure(text=timer, bg=color)
+
+    def _banner_hide(self) -> None:
+        self.banner.configure(bg=BGC)
+        self.banner_lbl.configure(text="", bg=BGC)
+        self.banner_timer.configure(text="", bg=BGC)
+
+    def _set_actions(self, enabled: bool) -> None:
+        for w in self._action_btns:
+            try:
+                w.configure(state="normal" if enabled else "disabled")
+            except tk.TclError:
+                pass
 
     def _reload_session_tab(self) -> None:
         if not self.proj:
             self._info_title.configure(text="No session selected")
             self._info_sub.configure(text="Create a new session or pick one from the list.")
-            for w in (self.btn_record, self.btn_import, self.btn_transcribe):
-                w.configure(state="disabled")
+            self._set_actions(False)
             return
         s = self.session
         self._info_title.configure(text=s.name)
@@ -362,11 +368,12 @@ class App(tk.Tk):
         if s.duration_s:
             sub += f"   •   {_fmt_duration(s.duration_s)} recording"
         self._info_sub.configure(text=sub)
-        for w in (self.btn_record, self.btn_import, self.btn_transcribe):
-            w.configure(state="normal")
         busy = self._worker is not None and self._worker.is_alive()
+        self._set_actions(not busy)
         if busy:
-            self.btn_record.configure(state="disabled")
+            self.btn_cancel.configure(state="normal")
+        if self._rec_stop is not None:
+            self._rec_stop = None  # dead recording session marker
 
     # ---------------------------------------------------------- new/delete ---
     def _new_session(self) -> None:
@@ -441,11 +448,24 @@ class App(tk.Tk):
             except Exception as e:  # noqa: BLE001
                 self._msg_queue.append(("rec_fail", str(e)))
 
-        self.btn_record.configure(text="■ Stop", bg="#C5484D")
-        self.btn_import.configure(state="disabled")
-        self.rec_elapsed.configure(text="recording…")
-        self._status_msg("Recording — click Stop when done.", "warn")
+        # UNMISSABLE recording state: red banner + count-up timer + locked actions
+        self._set_actions(False)
+        self._primary.configure(text="■ Stop recording", bg="#C5484D", state="normal")
+        self._banner_show("● RECORDING — everything you play is being captured",
+                          "#C5484D", "0:00")
+        self.title(f"● RECORDING — {self.session.name if self.session else 'Piano Scribe'}")
+        self._status_msg("Recording — click “Stop recording” when done.", "warn")
+        self._rec_tick()
         threading.Thread(target=work, daemon=True).start()
+
+    def _rec_tick(self) -> None:
+        if self._rec_stop is None or self._closing:
+            return
+        if self._rec_stop.is_set():
+            return  # stopped; rec_done message will finalize the UI
+        t = int(time.time() - self._rec_start)
+        self.banner_timer.configure(text=f"{t // 60}:{t % 60:02d}")
+        self.after(200, self._rec_tick)
 
     def _stop_record(self) -> None:
         if self._rec_stop is not None:
@@ -513,11 +533,12 @@ class App(tk.Tk):
 
         self.progress.configure(value=0)
         self._worker = threading.Thread(target=work, daemon=True)
-        self._worker.start()
-        self.btn_transcribe.configure(state="disabled")
+        self._set_actions(False)
         self.btn_cancel.configure(state="normal")
-        self.btn_record.configure(state="disabled")
+        self._banner_show("Transcribing locally…", ACCENT)
+        self.title(f"Transcribing — {self.session.name if self.session else 'Piano Scribe'}")
         self._status_msg("Transcribing locally…", "warn")
+        self._worker.start()
         self._poll_progress()
 
     def _poll_progress(self) -> None:
@@ -531,9 +552,8 @@ class App(tk.Tk):
         else:
             self.progress.configure(value=0)
             self.prog_label.configure(text="")
-            self.btn_transcribe.configure(state="normal")
             self.btn_cancel.configure(state="disabled")
-            self.btn_record.configure(state="normal")
+            self._set_actions(True)
 
     def _cancel_work(self) -> None:
         if self._tracker is not None:
@@ -721,6 +741,55 @@ class App(tk.Tk):
             text=f"#{i} {midi_name(n.pitch)}  onset {n.onset:.3f}s  end {n.end:.3f}s"
                  f"  conf {n.confidence if n.confidence is not None else '–'}  state {n.state}")
 
+    # ------------------------------------------------------------- transfer ---
+    def _export_session(self) -> None:
+        if not self.proj:
+            return
+        from .transfer import export_session, TransferError
+        name = "".join(c for c in self.session.name if c.isalnum() or c in " _-") or "session"
+        path = filedialog.asksaveasfilename(
+            parent=self, title="Export session",
+            defaultextension=".pianoscribe",
+            initialfile=f"{name}.pianoscribe",
+            filetypes=[("Piano Scribe session", "*.pianoscribe"), ("ZIP archive", "*.zip")])
+        if not path:
+            return
+        try:
+            export_session(self.proj.root, Path(path))
+        except (TransferError, OSError) as e:
+            messagebox.showerror("Piano Scribe", f"Export failed:\n{e}", parent=self)
+            return
+        self._status_msg(f"Session exported → {path}", "ok")
+        self._banner_show("✓ Session exported — share the file or move it to another PC", GOOD)
+
+    def _import_session(self) -> None:
+        from .transfer import import_session, TransferError
+        path = filedialog.askopenfilename(
+            parent=self, title="Import session",
+            filetypes=[("Piano Scribe session", "*.pianoscribe"), ("ZIP archive", "*.zip"),
+                       ("All files", "*.*")])
+        if not path:
+            return
+        try:
+            folder = import_session(Path(path), self.sessions_root)
+        except (TransferError, OSError) as e:
+            messagebox.showerror("Piano Scribe", f"Import failed:\n{e}", parent=self)
+            return
+        self._status_msg(f"Imported session → {folder.name}", "ok")
+        self._banner_show("✓ Session imported", GOOD)
+        self._refresh_sessions()
+        for s in list_sessions(self.sessions_root):
+            if s.path == folder:
+                self._open_session(s)
+                break
+
+    def _open_folder(self) -> None:
+        if self.proj:
+            try:
+                _os.startfile(str(self.proj.root))
+            except OSError:
+                pass
+
     # ------------------------------------------------------------- export ---
     def _export(self, fmt: str) -> None:
         if not self.proj:
@@ -883,28 +952,37 @@ class App(tk.Tk):
                 continue
             if kind in ("work_done",):
                 self._status_msg(text, "ok")
+                self.title(f"Piano Scribe — {self.session.name if self.session else ''}")
+                self._banner_show("✓ Transcription ready", GOOD)
                 if self.proj:
                     self._reload_detail()
                 self._refresh_sessions()
             elif kind == "work_cancel":
                 self._status_msg(text, "warn")
+                self.title(f"Piano Scribe — {self.session.name if self.session else ''}")
+                self._banner_show("Transcription cancelled", WARN)
             elif kind == "work_fail":
                 self._status_msg(f"Transcription failed: {text}", "warn")
+                self.title(f"Piano Scribe — {self.session.name if self.session else ''}")
+                self._banner_show("Transcription failed", "#C5484D")
                 messagebox.showerror("Piano Scribe", f"Transcription failed:\n{text}", parent=self)
             elif kind == "rec_done":
                 self._status_msg(text, "ok")
-                self.btn_record.configure(text="● Record")
-                self.btn_import.configure(state="normal")
-                self.rec_elapsed.configure(text="")
+                self.title(f"Piano Scribe — {self.session.name if self.session else ''}")
+                self._primary.configure(text="● Record")
+                self._banner_show("✓ Recording saved", GOOD,
+                                  _fmt_duration(float(text.split()[1])) if text.split()[1].replace(".", "").isdigit() else "")
+                self._set_actions(True)
                 self._reload_session_tab()
                 self._refresh_sessions()
                 if messagebox.askyesno("Piano Scribe", "Recording saved. Transcribe it now?",
                                        parent=self):
                     self._transcribe()
             elif kind == "rec_fail":
-                self.btn_record.configure(text="● Record")
-                self.btn_import.configure(state="normal")
-                self.rec_elapsed.configure(text="")
+                self.title(f"Piano Scribe — {self.session.name if self.session else ''}")
+                self._primary.configure(text="● Record")
+                self._banner_show("Recording failed", "#C5484D")
+                self._set_actions(True)
                 self._status_msg(f"Recording failed: {text}", "warn")
         self.after(120, self._pump_msgs)
 

@@ -16,6 +16,42 @@ record ─▶ original.wav (immutable) ─▶ local model ─▶ note events ─
                                   (pipeline, §6)
 ```
 
+## Installation
+
+**Requirements:** Windows 10/11. Everything runs offline — the model is
+bundled/installed locally; no cloud, no account.
+
+### Option A — the app (easiest)
+
+Download `PianoScribe.exe` from the [Releases page](https://github.com/johenaught/piano-scribe/releases)
+and double-click it. It is a self-contained Windows app — model included, no
+installation, works offline. Windows SmartScreen may warn about an unsigned
+app; click **More info → Run anyway**.
+
+### Option B — one-click installer (from the source zip)
+
+1. On the [Releases page](https://github.com/johenaught/piano-scribe/releases),
+   download the **Source code (zip)** and extract it anywhere.
+2. Right-click `scripts\install.ps1` → **Run with PowerShell**.
+   (Or run `powershell -ExecutionPolicy Bypass -File scripts\install.ps1`.)
+3. It downloads the model packages once (~300 MB), then puts a **Piano Scribe**
+   shortcut on your Desktop. Everything after that is offline.
+
+### Option C — from source (developers)
+
+```bash
+git clone https://github.com/johenaught/piano-scribe.git
+cd piano-scribe
+python -m venv .venv                       # Python 3.11+
+.venv\Scripts\activate
+pip install -e ".[baseline,capture,dev]"   # model, microphone, tests
+piano-scribe-gui                           # or: pythonw -m piano_scribe.gui
+```
+
+A desktop shortcut is created by `scripts/make_shortcut.ps1`.
+Uninstall: delete the Desktop shortcut and (option B) `%LOCALAPPDATA%\PianoScribe`;
+sessions in `Documents\Piano Scribe Sessions` are yours to keep.
+
 ## What's implemented
 
 | Outline area | Here |
@@ -48,7 +84,12 @@ detail pane with Record / Import / Transcribe (progress + cancel) / note
 editing / piano-roll score / original-vs-detected playback comparison /
 MIDI + MusicXML export. Sessions live in `~/Documents/Piano Scribe Sessions`
 (projects created by the CLI can be added via "Add existing project…").
-A desktop shortcut is created by `scripts/make_shortcut.ps1`.
+
+The app makes its state unmistakable: while recording, a red banner with a
+live timer fills the top of the window and every other action is locked;
+while transcribing, a blue banner shows progress. Sessions move between
+computers with **⇅ Export session… / ⇅ Import session…** (a single
+`.pianoscribe` file containing the recording, notes, and exports).
 
 CLI equivalents work on the same project folders:
 

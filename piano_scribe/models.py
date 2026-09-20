@@ -53,7 +53,13 @@ _BASIC_PITCH_MODEL = None
 _BASIC_PITCH_VERSION = ""
 
 
-def _load_basic_pitch():
+def _load_basic_pitch(force_runtime: str = "onnx"):
+    """Load the basic-pitch ICASSP 2022 model, preferring the ONNX
+    serialization executed by ONNX Runtime (the outline's Windows runtime).
+
+    The pip package ships the TF/CoreML/TFLite/ONNX artifacts side by side;
+    the ONNX file keeps the app lean (no TensorFlow) and gives an exact
+    match with the planned native runtime on Windows (outline 4)."""
     global _BASIC_PITCH_MODEL_PATH, _BASIC_PITCH_MODEL, _BASIC_PITCH_VERSION
     if _BASIC_PITCH_MODEL is not None:
         return _BASIC_PITCH_MODEL
@@ -70,7 +76,11 @@ def _load_basic_pitch():
         _BASIC_PITCH_VERSION = md.version("basic-pitch")
     except Exception:
         _BASIC_PITCH_VERSION = "unknown"
-    _BASIC_PITCH_MODEL = Model(ICASSP_2022_MODEL_PATH)
+    if force_runtime == "onnx":
+        onnx_path = Path(ICASSP_2022_MODEL_PATH).parent / "nmp.onnx"
+        if onnx_path.exists():
+            _BASIC_PITCH_MODEL_PATH = onnx_path
+    _BASIC_PITCH_MODEL = Model(_BASIC_PITCH_MODEL_PATH)
     return _BASIC_PITCH_MODEL
 
 

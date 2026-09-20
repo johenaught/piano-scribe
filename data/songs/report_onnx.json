@@ -1,0 +1,462 @@
+{
+  "settings": {
+    "model": "basic-pitch",
+    "min_pitch": 21,
+    "max_pitch": 108,
+    "onset_threshold": 0.6,
+    "frame_threshold": 0.45,
+    "infer_onsets": false,
+    "melodia_trick": false,
+    "min_note_length_s": 0.05,
+    "min_confidence": 0.25,
+    "suppress_octave_leak": true,
+    "merge_gap_s": 0.09,
+    "chunk_s": 45.0,
+    "overlap_s": 2.0,
+    "denoise": false,
+    "calibration": {}
+  },
+  "eval": {
+    "tol_on_s": 0.05
+  },
+  "songs": {
+    "fur_elise": {
+      "meta": {
+        "path": "data\\songs\\fur_elise.mid",
+        "name": "fur_elise",
+        "tempo_est": 205.3,
+        "n_notes": 955,
+        "duration_s": 211.35
+      },
+      "result": {
+        "n_ref": 955,
+        "n_pred": 657,
+        "tp": 620,
+        "fp": 37,
+        "fn": 335,
+        "octave_errors": 2,
+        "onset_mae": 0.006442809995941725,
+        "end_mae": 0.6460522932418357,
+        "end_mismatch": 444,
+        "precision": 0.943683409436834,
+        "recall": 0.6492146596858639,
+        "f1": 0.7692307692307692,
+        "fp_details": [
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 52,
+              "onset": 105.94717006802722,
+              "end": 106.06326984126984,
+              "confidence": 0.4646858274936676,
+              "velocity": 59,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 40,
+              "onset": 105.96818181818182,
+              "end": 106.31818181818181,
+              "confidence": null,
+              "velocity": 52,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          },
+          {
+            "reason": "octave",
+            "pred": {
+              "pitch": 33,
+              "onset": 136.9579700680272,
+              "end": 137.67778866213152,
+              "confidence": 0.5065352320671082,
+              "velocity": 64,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            },
+            "ref": {
+              "pitch": 45,
+              "onset": 136.87045454545455,
+              "end": 137.15,
+              "confidence": null,
+              "velocity": 51,
+              "sustain_pedal": false,
+              "state": "untouched",
+              "note_id": null
+            }
+          }
+        ],
+        "fn_details": []
+      },
+      "result_loose_100ms": {
+        "f1": 0.777,
+        "precision": 0.953,
+        "recall": 0.655,
+        "tp": 626,
+        "fp": 31,
+        "fn": 329
+      },
+      "n_missed": 335,
+      "n_phantoms": 37,
+      "missed": [
+        {
+          "note": "A4",
+          "pitch": 69,
+          "onset": 6.948,
+          "end": 7.191,
+          "conf": null
+        },
+        {
+          "note": "E3",
+          "pitch": 52,
+          "onset": 9.095,
+          "end": 9.445,
+          "conf": null
+        },
+        {
+          "note": "D#5",
+          "pitch": 75,
+          "onset": 10.684,
+          "end": 10.932,
+          "conf": null
+        },
+        {
+          "note": "E5",
+          "pitch": 76,
+          "onset": 10.943,
+          "end": 11.455,
+          "conf": null
+        },
+        {
+          "note": "A3",
+          "pitch": 57,
+          "onset": 12.575,
+          "end": 12.925,
+          "conf": null
+        },
+        {
+          "note": "E3",
+          "pitch": 52,
+          "onset": 13.855,
+          "end": 14.205,
+          "conf": null
+        },
+        {
+          "note": "E3",
+          "pitch": 52,
+          "onset": 15.52,
+          "end": 15.87,
+          "conf": null
+        },
+        {
+          "note": "E3",
+          "pitch": 52,
+          "onset": 19.073,
+          "end": 19.423,
+          "conf": null
+        },
+        {
+          "note": "A4",
+          "pitch": 69,
+          "onset": 20.089,
+          "end": 20.341,
+          "conf": null
+        },
+        {
+          "note": "E3",
+          "pitch": 52,
+          "onset": 20.655,
+          "end": 21.005,
+          "conf": null
+        },
+        {
+          "note": "A3",
+          "pitch": 57,
+          "onset": 21.984,
+          "end": 22.539,
+          "conf": null
+        },
+        {
+          "note": "E3",
+          "pitch": 52,
+          "onset": 22.255,
+          "end": 22.605,
+          "conf": null
+        },
+        {
+          "note": "A3",
+          "pitch": 57,
+          "onset": 22.545,
+          "end": 22.895,
+          "conf": null
+        },
+        {
+          "note": "D#5",
+          "pitch": 75,
+          "onset": 23.864,
+          "end": 24.111,
+          "conf": null
+        },
+        {
+          "note": "E5",
+          "pitch": 76,
+          "onset": 24.123,
+          "end": 24.659,
+          "conf": null
+        },
+        {
+          "note": "A4",
+          "pitch": 69,
+          "onset": 26.745,
+          "end": 27.03,
+          "conf": null
+        },
+        {
+          "note": "E3",
+          "pitch": 52,
+          "onset": 27.302,
+          "end": 27.652,
+          "conf": null
+        },
+        {
+          "note": "G2",
+          "pitch": 43,
+          "onset": 32.148,
+          "end": 32.498,
+          "conf": null
+        },
+        {
+          "note": "A3",
+          "pitch": 57,
+          "onset": 33.891,
+          "end": 34.241,
+          "conf": null
+        },
+        {
+          "note": "C5",
+          "pitch": 72,
+          "onset": 35.593,
+          "end": 36.082,
+          "conf": null
+        },
+        {
+          "note": "E4",
+          "pitch": 64,
+          "onset": 37.252,
+          "end": 37.78,
+          "conf": null
+        },
+        {
+          "note": "E4",
+          "pitch": 64,
+          "onset": 37.793,
+          "end": 38.143,
+          "conf": null
+        },
+        {
+          "note": "E5",
+          "pitch": 76,
+          "onset": 38.093,
+          "end": 38.4,
+          "conf": null
+        },
+        {
+          "note": "E5",
+          "pitch": 76,
+          "onset": 38.409,
+          "end": 39.009,
+          "conf": null
+        },
+        {
+          "note": "D#5",
+          "pitch": 75,
+          "onset": 41.093,
+          "end": 41.393,
+          "conf": null
+        }
+      ],
+      "phantoms": [
+        {
+          "note": "D#5",
+          "pitch": 75,
+          "onset": 11.338,
+          "end": 11.454,
+          "conf": 0.656
+        },
+        {
+          "note": "B4",
+          "pitch": 71,
+          "onset": 14.545,
+          "end": 14.684,
+          "conf": 0.526
+        },
+        {
+          "note": "A4",
+          "pitch": 69,
+          "onset": 16.218,
+          "end": 16.554,
+          "conf": 0.642
+        },
+        {
+          "note": "E3",
+          "pitch": 52,
+          "onset": 18.994,
+          "end": 20.156,
+          "conf": 0.593
+        },
+        {
+          "note": "B4",
+          "pitch": 71,
+          "onset": 20.342,
+          "end": 20.655,
+          "conf": 0.523
+        },
+        {
+          "note": "B4",
+          "pitch": 71,
+          "onset": 21.34,
+          "end": 21.445,
+          "conf": 0.515
+        },
+        {
+          "note": "E5",
+          "pitch": 76,
+          "onset": 25.012,
+          "end": 25.348,
+          "conf": 0.537
+        },
+        {
+          "note": "G2",
+          "pitch": 43,
+          "onset": 32.087,
+          "end": 33.865,
+          "conf": 0.65
+        },
+        {
+          "note": "D5",
+          "pitch": 74,
+          "onset": 33.039,
+          "end": 33.306,
+          "conf": 0.552
+        },
+        {
+          "note": "E3",
+          "pitch": 52,
+          "onset": 36.06,
+          "end": 36.153,
+          "conf": 0.436
+        },
+        {
+          "note": "E5",
+          "pitch": 76,
+          "onset": 41.276,
+          "end": 41.694,
+          "conf": 0.862
+        },
+        {
+          "note": "E3",
+          "pitch": 52,
+          "onset": 44.518,
+          "end": 44.692,
+          "conf": 0.773
+        },
+        {
+          "note": "E3",
+          "pitch": 52,
+          "onset": 52.432,
+          "end": 53.223,
+          "conf": 0.51
+        },
+        {
+          "note": "A2",
+          "pitch": 45,
+          "onset": 55.663,
+          "end": 55.837,
+          "conf": 0.447
+        },
+        {
+          "note": "A3",
+          "pitch": 57,
+          "onset": 58.764,
+          "end": 59.601,
+          "conf": 0.572
+        },
+        {
+          "note": "A#5",
+          "pitch": 82,
+          "onset": 59.647,
+          "end": 60.216,
+          "conf": 0.687
+        },
+        {
+          "note": "E5",
+          "pitch": 76,
+          "onset": 74.587,
+          "end": 74.645,
+          "conf": 0.418
+        },
+        {
+          "note": "E3",
+          "pitch": 52,
+          "onset": 79.188,
+          "end": 79.444,
+          "conf": 0.601
+        },
+        {
+          "note": "E5",
+          "pitch": 76,
+          "onset": 80.372,
+          "end": 84.102,
+          "conf": 0.883
+        },
+        {
+          "note": "G3",
+          "pitch": 55,
+          "onset": 100.208,
+          "end": 101.799,
+          "conf": 0.576
+        },
+        {
+          "note": "C4",
+          "pitch": 60,
+          "onset": 100.928,
+          "end": 101.23,
+          "conf": 0.486
+        },
+        {
+          "note": "E2",
+          "pitch": 40,
+          "onset": 105.889,
+          "end": 107.84,
+          "conf": 0.717
+        },
+        {
+          "note": "E3",
+          "pitch": 52,
+          "onset": 105.947,
+          "end": 106.063,
+          "conf": 0.465
+        },
+        {
+          "note": "E5",
+          "pitch": 76,
+          "onset": 111.07,
+          "end": 111.418,
+          "conf": 0.613
+        },
+        {
+          "note": "E3",
+          "pitch": 52,
+          "onset": 116.472,
+          "end": 116.542,
+          "conf": 0.471
+        }
+      ],
+      "processing_s": 23.93,
+      "proc_s_per_min": 6.79
+    }
+  }
+}
